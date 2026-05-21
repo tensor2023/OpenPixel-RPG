@@ -137,11 +137,11 @@ No external agent frameworks (LangGraph, LangChain) — fully custom perceive-de
 | Component | Responsibility |
 |-----------|---------------|
 | `SimulationEngine` | Drives the tick loop — each tick, every NPC perceives, decides, acts, and remembers. |
-| `Perceiver` | Builds each NPC's perception context from nearby entities, recent events, and world state. |
+| `buildPerception()` | Builds each NPC's perception context from nearby entities, recent events, current emotion, and world state. |
 | `DecisionMaker` | Calls the Simulation LLM to select an action (move, talk, emote, use item, etc.) based on personality + perception. |
 | `DialogueGenerator` | Produces multi-turn NPC-to-NPC and NPC-to-player conversations with memory-aware context. |
 | `MemoryManager` | Stores individual memories, applies decay over time, and periodically consolidates related memories via LLM reflection. |
-| `EmotionManager` | Tracks valence and arousal per character, updated by events and dialogue outcomes. |
+| `emotion-manager` | `updateEmotion()` / `decayEmotion()` / `getEmotionLabel()` — tracks valence and arousal per character, updated by events and dialogue outcomes. |
 
 Each NPC autonomously: **perceives** the environment → **decides** what to do → **executes** the action → **forms memories** → **reflects** on experiences. You can also play "god" at any time: inject events, edit memories or traits, and watch the social dynamics shift in response.
 
