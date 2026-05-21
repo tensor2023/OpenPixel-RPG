@@ -19,9 +19,9 @@
 
 Turn any place on Earth into an interactive pixel-art JRPG.
 
-**OpenPixel-RPG** is an AI-powered pixel-art open-world UGC game. Input any location name, or upload your own photo, describe the art style you want, and OpenPixel-RPG generates a complete interactive pixel map with local NPCs. Every character has their own memory, personality, and social relationships — they make decisions, talk to each other, and produce emergent narratives no one scripted. You can also play "god" at any time: inject events, edit character memories or traits, and watch the world shift in response.
+**OpenPixel-RPG** is an AI-powered pixel-art open-world UGC game. Input any location name, or upload your own photo, describe the art style you want, and OpenPixel-RPG generates a complete interactive pixel map with local NPCs. Under the hood, Google Gemini models handle everything: world design (`gemini-2.5-pro`), map & sprite generation (`gemini-3.1-flash-image`), vision quality review (`gemini-3.1-pro`), and runtime character simulation (`gemini-2.5-flash`). Every NPC runs on a custom agent simulation system — no LangGraph or LangChain, just a hand-built perceive-decide-act loop where characters perceive their surroundings, make decisions via LLM, form memories, and produce emergent narratives no one scripted. You can also play "god" at any time: inject events, edit character memories or traits, and watch the world shift in response.
 
-Born from [isometric.nyc](https://isometric.nyc), this project replaces the NYC-specific data pipeline with globally available OSM + satellite + 3D Tiles, and deeply integrates [WorldX](https://github.com/YGYOOO/WorldX)'s AI world engine.
+Born from [isometric.nyc](https://isometric.nyc), this project replaces the NYC-specific data pipeline with globally available OSM Overpass + satellite + Google 3D Tiles, uses Baidu Maps for street-level scene reference, and deeply integrates [WorldX](https://github.com/YGYOOO/WorldX)'s AI world engine.
 
 ![Game Tutorial](video/教程.png)
 
