@@ -49,7 +49,7 @@ Enter a Manhattan landmark name, and OpenPixel-RPG fetches pre-generated pixel t
 
 ![Mode 2 Demo](video/demo.gif)
 
-> [Watch full video](video/Demo2.mp4)
+> [Watch full video](https://xueqinggao.github.io/video/Demo2.mp4)
 
 **How it works:**
 1. Click **City Map**, then input a location (e.g. Times Square, Central Park, Empire State Building, Brooklyn Bridge, and many more).
