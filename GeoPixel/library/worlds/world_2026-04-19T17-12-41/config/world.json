@@ -1,0 +1,457 @@
+{
+  "worldName": "Post-Victory Pixel Hamlet",
+  "worldDescription": "A pixel-art RPG village where residents are figuring out new life purpose after the hero saved the world and left. A grand stone statue of the hero stands in the central plaza, with every corner holding traces of the past adventure era.",
+  "worldSocialContext": "All residents have known each other for years from the era of monster attacks and hero quests. Now that the world is permanently safe, everyone is quietly uncertain about their life's purpose, and conversations often drift to stories of the hero's exploits.",
+  "contentLanguage": "en",
+  "originalPrompt": "A pixel-art RPG village after the hero saved the world and left. The NPCs must figure out what to do with their lives now. Characters: a peddler who strolls around town every day with nothing left to sell, a healer with no patients sitting idle in her cottage, a blacksmith who spent years forging the hero's legendary sword but now makes spoons, a bard who only knows one song — \"The Ballad of the Hero\", a child who insists they are the next hero, a guard who keeps repeating \"Nothing to report\", and a philosophical village chief who ponders the meaning of a world already saved.",
+  "scene": {
+    "sceneType": "open",
+    "startTime": "08:00",
+    "tickDurationMinutes": 15,
+    "maxTicks": 48,
+    "displayFormat": "fantasy",
+    "description": "A pixel-art RPG village where residents are figuring out new life purpose after the hero saved the world and left. A grand stone statue of the hero stands in the central plaza, with every corner holding traces of the past adventure era.",
+    "multiDay": {
+      "enabled": true,
+      "endOfDayText": "The sun dips below the hills, villagers lock up their homes and return indoors for the night.",
+      "newDayText": "The rooster crows at dawn, the village wakes up to another quiet peaceful day.",
+      "nextDayStartTime": "08:00"
+    }
+  },
+  "worldActions": [
+    {
+      "id": "stroll_around_village",
+      "name": "Stroll Around the Village",
+      "description": "Wander along the village roads and observe the surrounding scenery and residents.",
+      "availableWhenState": [
+        "available"
+      ],
+      "duration": 2,
+      "effects": [
+        {
+          "type": "character_need",
+          "target": "curiosity",
+          "value": 8
+        }
+      ],
+      "repeatable": true
+    },
+    {
+      "id": "discuss_hero_stories",
+      "name": "Discuss Hero Stories",
+      "description": "Chat with nearby villagers about the hero's past adventures and victory.",
+      "availableWhenState": [
+        "available"
+      ],
+      "duration": 3,
+      "effects": [
+        {
+          "type": "character_need",
+          "target": "social",
+          "value": 10
+        }
+      ],
+      "repeatable": true
+    },
+    {
+      "id": "ponder_life_purpose",
+      "name": "Ponder Life Purpose",
+      "description": "Stand still and think about what to do in this already saved, peaceful world.",
+      "availableWhenState": [
+        "available"
+      ],
+      "duration": 2,
+      "effects": [
+        {
+          "type": "character_need",
+          "target": "mood",
+          "value": 5
+        }
+      ],
+      "repeatable": true
+    }
+  ],
+  "locations": [
+    {
+      "id": "main_area",
+      "name": "主区域",
+      "description": "A pixel-art RPG village where residents are figuring out new life purpose after the hero saved the world and left. A grand stone statue of the hero stands in the central plaza, with every corner holding traces of the past adventure era.",
+      "adjacentLocations": [
+        "central_plaza",
+        "blacksmith_forge",
+        "healer_cottage"
+      ],
+      "objects": []
+    },
+    {
+      "id": "central_plaza",
+      "name": "Central Plaza",
+      "description": "Open public space at the village core with the grand hero statue as its centerpiece.",
+      "adjacentLocations": [
+        "main_area",
+        "blacksmith_forge",
+        "healer_cottage"
+      ],
+      "objects": [
+        {
+          "id": "admire_hero_statue",
+          "name": "Admire Hero Statue",
+          "locationId": "central_plaza",
+          "defaultState": "available",
+          "capacity": 2,
+          "interactions": [
+            {
+              "id": "admire_hero_statue",
+              "name": "Admire Hero Statue",
+              "description": "Stand in front of the statue and look at the hero's carved likeness.",
+              "availableWhenState": [
+                "available"
+              ],
+              "duration": 1,
+              "effects": [
+                {
+                  "type": "character_need",
+                  "target": "nostalgia",
+                  "value": 7
+                }
+              ],
+              "repeatable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blacksmith_forge",
+      "name": "Blacksmith's Forge",
+      "description": "West-side workshop where the blacksmith once forged the hero's legendary sword, now makes household cutlery.",
+      "adjacentLocations": [
+        "main_area",
+        "central_plaza",
+        "healer_cottage"
+      ],
+      "objects": [
+        {
+          "id": "browse_handmade_spoons",
+          "name": "Browse Handmade Spoons",
+          "locationId": "blacksmith_forge",
+          "defaultState": "available",
+          "capacity": 2,
+          "interactions": [
+            {
+              "id": "browse_handmade_spoons",
+              "name": "Browse Handmade Spoons",
+              "description": "Look at the neatly stacked, well-crafted spoons the blacksmith has made.",
+              "availableWhenState": [
+                "available"
+              ],
+              "duration": 1,
+              "effects": [
+                {
+                  "type": "character_need",
+                  "target": "curiosity",
+                  "value": 5
+                }
+              ],
+              "repeatable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "healer_cottage",
+      "name": "Healer's Cottage",
+      "description": "East-side small cottage where the healer once treated wounded adventurers, now sits mostly unused.",
+      "adjacentLocations": [
+        "main_area",
+        "central_plaza",
+        "blacksmith_forge"
+      ],
+      "objects": [
+        {
+          "id": "browse_herb_shelves",
+          "name": "Browse Herb Shelves",
+          "locationId": "healer_cottage",
+          "defaultState": "available",
+          "capacity": 2,
+          "interactions": [
+            {
+              "id": "browse_herb_shelves",
+              "name": "Browse Herb Shelves",
+              "description": "Look at the neatly arranged dried medicinal herbs on the shelves.",
+              "availableWhenState": [
+                "available"
+              ],
+              "duration": 1,
+              "effects": [
+                {
+                  "type": "character_need",
+                  "target": "curiosity",
+                  "value": 4
+                }
+              ],
+              "repeatable": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "mainAreaPoints": [
+    {
+      "id": "main_area_point_1",
+      "name": "主区域点位1",
+      "x": 1068,
+      "y": 732,
+      "adjacentPointIds": [
+        "main_area_point_16",
+        "main_area_point_18"
+      ]
+    },
+    {
+      "id": "main_area_point_2",
+      "name": "主区域点位2",
+      "x": 2636,
+      "y": 396,
+      "adjacentPointIds": [
+        "main_area_point_22"
+      ]
+    },
+    {
+      "id": "main_area_point_3",
+      "name": "主区域点位3",
+      "x": 172,
+      "y": 1180,
+      "adjacentPointIds": [
+        "main_area_point_23"
+      ]
+    },
+    {
+      "id": "main_area_point_4",
+      "name": "主区域点位4",
+      "x": 2188,
+      "y": 1180,
+      "adjacentPointIds": [
+        "main_area_point_20"
+      ]
+    },
+    {
+      "id": "main_area_point_5",
+      "name": "主区域点位5",
+      "x": 284,
+      "y": 396,
+      "adjacentPointIds": [
+        "main_area_point_21"
+      ]
+    },
+    {
+      "id": "main_area_point_6",
+      "name": "主区域点位6",
+      "x": 1852,
+      "y": 396,
+      "adjacentPointIds": [
+        "main_area_point_15"
+      ]
+    },
+    {
+      "id": "main_area_point_7",
+      "name": "主区域点位7",
+      "x": 1404,
+      "y": 1404,
+      "adjacentPointIds": [
+        "main_area_point_19"
+      ]
+    },
+    {
+      "id": "main_area_point_8",
+      "name": "主区域点位8",
+      "x": 1404,
+      "y": 60,
+      "adjacentPointIds": [
+        "main_area_point_24"
+      ]
+    },
+    {
+      "id": "main_area_point_9",
+      "name": "主区域点位9",
+      "x": 620,
+      "y": 1404,
+      "adjacentPointIds": [
+        "main_area_point_14"
+      ]
+    },
+    {
+      "id": "main_area_point_10",
+      "name": "主区域点位10",
+      "x": 732,
+      "y": 396,
+      "adjacentPointIds": [
+        "main_area_point_21"
+      ]
+    },
+    {
+      "id": "main_area_point_11",
+      "name": "主区域点位11",
+      "x": 1068,
+      "y": 1180,
+      "adjacentPointIds": [
+        "main_area_point_16"
+      ]
+    },
+    {
+      "id": "main_area_point_12",
+      "name": "主区域点位12",
+      "x": 1740,
+      "y": 1180,
+      "adjacentPointIds": [
+        "main_area_point_19"
+      ]
+    },
+    {
+      "id": "main_area_point_13",
+      "name": "主区域点位13",
+      "x": 1292,
+      "y": 396,
+      "adjacentPointIds": [
+        "main_area_point_24"
+      ]
+    },
+    {
+      "id": "main_area_point_14",
+      "name": "主区域点位14",
+      "x": 620,
+      "y": 1068,
+      "adjacentPointIds": [
+        "main_area_point_9"
+      ]
+    },
+    {
+      "id": "main_area_point_15",
+      "name": "主区域点位15",
+      "x": 2188,
+      "y": 396,
+      "adjacentPointIds": [
+        "main_area_point_6"
+      ]
+    },
+    {
+      "id": "main_area_point_16",
+      "name": "主区域点位16",
+      "x": 1068,
+      "y": 956,
+      "adjacentPointIds": [
+        "main_area_point_1",
+        "main_area_point_11"
+      ]
+    },
+    {
+      "id": "main_area_point_17",
+      "name": "主区域点位17",
+      "x": 1516,
+      "y": 396,
+      "adjacentPointIds": [
+        "main_area_point_24"
+      ]
+    },
+    {
+      "id": "main_area_point_18",
+      "name": "主区域点位18",
+      "x": 1068,
+      "y": 508,
+      "adjacentPointIds": [
+        "main_area_point_1"
+      ]
+    },
+    {
+      "id": "main_area_point_19",
+      "name": "主区域点位19",
+      "x": 1404,
+      "y": 1180,
+      "adjacentPointIds": [
+        "main_area_point_12",
+        "main_area_point_7"
+      ]
+    },
+    {
+      "id": "main_area_point_20",
+      "name": "主区域点位20",
+      "x": 2188,
+      "y": 956,
+      "adjacentPointIds": [
+        "main_area_point_4"
+      ]
+    },
+    {
+      "id": "main_area_point_21",
+      "name": "主区域点位21",
+      "x": 508,
+      "y": 396,
+      "adjacentPointIds": [
+        "main_area_point_10",
+        "main_area_point_5"
+      ]
+    },
+    {
+      "id": "main_area_point_22",
+      "name": "主区域点位22",
+      "x": 2412,
+      "y": 396,
+      "adjacentPointIds": [
+        "main_area_point_2"
+      ]
+    },
+    {
+      "id": "main_area_point_23",
+      "name": "主区域点位23",
+      "x": 172,
+      "y": 956,
+      "adjacentPointIds": [
+        "main_area_point_3"
+      ]
+    },
+    {
+      "id": "main_area_point_24",
+      "name": "主区域点位24",
+      "x": 1404,
+      "y": 284,
+      "adjacentPointIds": [
+        "main_area_point_13",
+        "main_area_point_17",
+        "main_area_point_8"
+      ]
+    }
+  ],
+  "worldSize": {
+    "width": 2752,
+    "height": 1536,
+    "tileSize": 8,
+    "gridWidth": 344,
+    "gridHeight": 192
+  },
+  "metadata": {
+    "worldName": "Post-Victory Pixel Hamlet",
+    "worldDescription": "A pixel-art RPG village where residents are figuring out new life purpose after the hero saved the world and left. A grand stone statue of the hero stands in the central plaza, with every corner holding traces of the past adventure era.",
+    "worldSocialContext": "All residents have known each other for years from the era of monster attacks and hero quests. Now that the world is permanently safe, everyone is quietly uncertain about their life's purpose, and conversations often drift to stories of the hero's exploits.",
+    "originalPrompt": "A pixel-art RPG village after the hero saved the world and left. The NPCs must figure out what to do with their lives now. The village has a central plaza with a grand stone statue of the hero at its center, a blacksmith's forge with an anvil and cooling rack on the west side, a healer's cottage with herb shelves and an empty patient bed on the east side, and a few small houses scattered along the roads (non-enterable). Characters: a peddler who strolls around town every day with nothing left to sell, a healer with no patients sitting idle in her cottage, a blacksmith who spent years forging the hero's legendary sword but now makes spoons, a bard who only knows one song — \"The Ballad of the Hero\", a child who insists they are the next hero, a guard who keeps repeating \"Nothing to report\", and a philosophical village chief who ponders the meaning of a world already saved.",
+    "sceneType": "open",
+    "timeConfig": {
+      "startTime": "08:00",
+      "tickDurationMinutes": 15,
+      "maxTicks": 48,
+      "displayFormat": "fantasy"
+    },
+    "multiDay": {
+      "enabled": true,
+      "endOfDayText": "The sun dips below the hills, villagers lock up their homes and return indoors for the night.",
+      "newDayText": "The rooster crows at dawn, the village wakes up to another quiet peaceful day.",
+      "nextDayStartTime": "08:00"
+    },
+    "mapPlan": {
+      "buildingMode": "mostly_scenic",
+      "compositionNotes": "Central plaza at core, forge to west, healer cottage to east, dirt roads radiating outwards.",
+      "worldFunctionSummary": "Small peaceful village for residents to socialize, work, and explore post-savior life.",
+      "regionDesignNotes": "Only the forge, healer cottage and central plaza are enterable, other small houses are non-enterable scenic decorations."
+    }
+  }
+}

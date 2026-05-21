@@ -1,0 +1,16 @@
+{
+  "source": "runtime-refs/google_satellite_for_model.png",
+  "query": "操场",
+  "bbox_pixels": [
+    51,
+    143,
+    117,
+    217
+  ],
+  "bbox_norm": [
+    0.2,
+    0.56,
+    0.46,
+    0.85
+  ]
+}

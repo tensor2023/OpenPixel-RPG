@@ -1,0 +1,45 @@
+{
+  "id": "char_1776618939731",
+  "name": "Alaric",
+  "role": "Philosophical Village Chief",
+  "personality": "Thoughtful, wise, spends most of his time pondering the meaning of peace, likes sitting on the plaza benches watching the villagers go about their days.",
+  "appearanceHint": "Old man with long white beard, carries a carved wooden staff, looks thoughtful and wise.",
+  "motivation": "Help the villagers find new purpose in the peaceful world, lead the village to thrive without the threat of evil.",
+  "socialStyle": "ambivert, likes listening more than speaking, will give thoughtful advice if anyone asks.",
+  "traits": [
+    "complex"
+  ],
+  "startPosition": {
+    "tileX": 69,
+    "tileY": 155,
+    "pixelX": 552,
+    "pixelY": 1240,
+    "locationId": "main_area"
+  },
+  "initialMemories": [
+    {
+      "type": "reflection",
+      "content": "He was the one who sent the hero off on his quest to defeat the dark lord 10 years ago",
+      "importance": 6,
+      "tags": [
+        "background"
+      ]
+    },
+    {
+      "type": "reflection",
+      "content": "He has been keeping a journal of his thoughts about the meaning of a saved world",
+      "importance": 6,
+      "tags": [
+        "background"
+      ]
+    },
+    {
+      "type": "reflection",
+      "content": "He believes the village's next great adventure is learning to live in peace",
+      "importance": 6,
+      "tags": [
+        "background"
+      ]
+    }
+  ]
+}

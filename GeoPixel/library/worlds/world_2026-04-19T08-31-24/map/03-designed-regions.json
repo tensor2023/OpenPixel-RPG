@@ -1,0 +1,59 @@
+[
+  {
+    "id": "pawn_shop",
+    "name": "当铺",
+    "description": "经营典当业务的临街店铺。",
+    "type": "building",
+    "enterable": true,
+    "shapeConstraint": "rectangular",
+    "placementHint": "主街左侧",
+    "visualDescription": "俯视无顶木构建筑，内有柜台货架",
+    "actions": [
+      "browse_pawned_goods",
+      "pawn_item"
+    ],
+    "adjacentRegions": [],
+    "interactions": [
+      {
+        "id": "browse_pawned_goods",
+        "name": "浏览典当品",
+        "description": "浏览当铺内陈列的各类典当物品。",
+        "availableWhenState": [
+          "available"
+        ],
+        "duration": 2,
+        "effects": [
+          {
+            "type": "character_need",
+            "target": "curiosity",
+            "value": 5
+          }
+        ],
+        "repeatable": true
+      },
+      {
+        "id": "pawn_item",
+        "name": "典当物品",
+        "description": "将随身物品典当给掌柜换取银两。",
+        "availableWhenState": [
+          "available"
+        ],
+        "duration": 3,
+        "effects": [
+          {
+            "type": "character_need",
+            "target": "money",
+            "value": 20
+          },
+          {
+            "type": "character_need",
+            "target": "satisfaction",
+            "value": 5
+          }
+        ],
+        "repeatable": true,
+        "requiresAnchor": true
+      }
+    ]
+  }
+]

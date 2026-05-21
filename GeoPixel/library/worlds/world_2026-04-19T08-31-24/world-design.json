@@ -1,0 +1,356 @@
+{
+  "feasible": true,
+  "contentLanguage": "zh",
+  "worldName": "汴京夜肆",
+  "worldDescription": "这是夜晚的宋朝繁华夜市，采用精美的古代工笔画风格。宽敞青石板路两侧排布着各式小房子与摊位，仅当铺可进入，算命铺、菩萨像可供交互。各色人等往来其间，暗藏着当铺失窃的小秘密。",
+  "worldSocialContext": "这是北宋汴京的市井夜市，往来多是本地居民与过路客商，陌生人搭话多从买卖、问路开始，市井消息传播速度快，人们对新鲜事物好奇心重。",
+  "mapDescription": "正上方俯视的工笔画风格夜市，青石板主街横贯画面，两侧排布木制建筑与摊位，暖黄配色。",
+  "sceneType": "open",
+  "timeConfig": {
+    "startTime": "19:00",
+    "tickDurationMinutes": 15,
+    "maxTicks": 28,
+    "displayFormat": "ancient_chinese"
+  },
+  "sceneTransitionText": {
+    "endOfDayText": "夜市灯火渐次熄灭，摊贩们收拾货担陆续归家，街市慢慢沉寂下来。",
+    "newDayText": "暮色四合，华灯初上，汴京城的夜市又热热闹闹地开了张。"
+  },
+  "mapPlan": {
+    "buildingMode": "mostly_scenic",
+    "compositionNotes": "中央青石板主街横贯左右，建筑与摊位沿两侧分布。",
+    "worldFunctionSummary": "供人闲逛、交易、社交的北宋市井夜市。",
+    "regionDesignNotes": "主街左侧当铺为唯一可进入建筑，其余互动元素分布在主街两侧。"
+  },
+  "worldActions": [
+    {
+      "id": "stroll_along_street",
+      "name": "沿街闲逛",
+      "description": "沿着青石板主街闲逛，观赏夜市各处景致。",
+      "availableWhenState": [
+        "available"
+      ],
+      "duration": 2,
+      "effects": [
+        {
+          "type": "character_need",
+          "target": "curiosity",
+          "value": 8
+        }
+      ],
+      "repeatable": true
+    },
+    {
+      "id": "buy_street_snack",
+      "name": "买街头小吃",
+      "description": "从街边普通小吃摊购买一份特色市井小吃。",
+      "availableWhenState": [
+        "available"
+      ],
+      "duration": 1,
+      "effects": [
+        {
+          "type": "character_need",
+          "target": "hunger",
+          "value": -15
+        },
+        {
+          "type": "character_need",
+          "target": "happiness",
+          "value": 10
+        }
+      ],
+      "repeatable": true
+    }
+  ],
+  "regions": [
+    {
+      "id": "pawn_shop",
+      "name": "当铺",
+      "description": "经营典当业务的临街店铺。",
+      "type": "building",
+      "enterable": true,
+      "shapeConstraint": "rectangular",
+      "placementHint": "主街左侧",
+      "visualDescription": "俯视无顶木构建筑，内有柜台货架",
+      "expectedObjects": [
+        "木质柜台",
+        "储物货架",
+        "铜制算盘"
+      ],
+      "interactions": [
+        {
+          "id": "browse_pawned_goods",
+          "name": "浏览典当品",
+          "description": "浏览当铺内陈列的各类典当物品。",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 2,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "curiosity",
+              "value": 5
+            }
+          ],
+          "repeatable": true
+        },
+        {
+          "id": "pawn_item",
+          "name": "典当物品",
+          "description": "将随身物品典当给掌柜换取银两。",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 3,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "money",
+              "value": 20
+            },
+            {
+              "type": "character_need",
+              "target": "satisfaction",
+              "value": 5
+            }
+          ],
+          "repeatable": true,
+          "requiresAnchor": true
+        }
+      ]
+    }
+  ],
+  "interactiveElements": [
+    {
+      "id": "fortune_telling_stall",
+      "name": "算命铺子",
+      "description": "路边算命小铺，可卜算个人运势吉凶。",
+      "visualDescription": "俯视小木桌，旁挂布幡",
+      "placementHint": "主街右侧中段",
+      "interactions": [
+        {
+          "id": "tell_fortune",
+          "name": "算运势",
+          "description": "找算命先生测算近期运势吉凶。",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 3,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "curiosity",
+              "value": -5
+            },
+            {
+              "type": "character_need",
+              "target": "peace",
+              "value": 10
+            }
+          ],
+          "repeatable": true,
+          "requiresAnchor": true
+        },
+        {
+          "id": "look_at_props",
+          "name": "看算命道具",
+          "description": "翻看摊位上摆放的各类算命道具。",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 1,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "curiosity",
+              "value": 3
+            }
+          ],
+          "repeatable": true
+        }
+      ]
+    },
+    {
+      "id": "bodhisattva_statue",
+      "name": "菩萨像",
+      "description": "供路人祭拜祈福的石质菩萨像。",
+      "visualDescription": "俯视圆形石座，上有立像轮廓",
+      "placementHint": "主街南端",
+      "interactions": [
+        {
+          "id": "worship_bodhisattva",
+          "name": "祭拜祈福",
+          "description": "向菩萨像祭拜，祈求心愿达成。",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 2,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "peace",
+              "value": 15
+            }
+          ],
+          "repeatable": true
+        }
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "name": "王掌柜",
+      "role": "当铺经营者",
+      "personality": "精打细算，性子有些急躁，最近因失窃心神不宁，对陌生人有防备心。",
+      "appearance": "当铺掌柜，头戴灰色软巾，穿藏青色粗布长袍，腰间挂着铜制钥匙串，手上戴着玉扳指。",
+      "appearanceHint": "穿着整洁的长袍，腰间挂着一串钥匙，看着像开店的老板。",
+      "motivation": "找回被偷的贵重典当品，减少当铺损失。",
+      "socialStyle": "ambivert，对熟客热情周到，遇到烦心事容易烦躁易怒。",
+      "anchor": {
+        "type": "region",
+        "targetId": "pawn_shop"
+      },
+      "initialMemories": [
+        "自己经营这家当铺已经十年了，口碑一直很好",
+        "昨天打烊清点时发现铺子里少了三件贵重典当品",
+        "已经托人报了官，正等着捕快来了解详情"
+      ]
+    },
+    {
+      "name": "李半仙",
+      "role": "算命摊主",
+      "personality": "性子慢，说话喜欢故弄玄虚，观察力强，胆子小怕惹事。",
+      "appearance": "算命先生，头戴黑色方巾，穿灰蓝色道袍，留山羊胡，手里握着拂尘。",
+      "appearanceHint": "留着山羊胡，穿着道袍，看着像懂些玄学的人。",
+      "motivation": "多招揽客人算命赚银两，不掺和是非。",
+      "socialStyle": "extrovert，擅长察言观色，会主动搭话过往路人招揽生意。",
+      "anchor": {
+        "type": "element",
+        "targetId": "fortune_telling_stall"
+      },
+      "initialMemories": [
+        "在这条夜市摆摊算命已经三年了，对周遭人事都很熟",
+        "昨天傍晚看到一个衣着普通的年轻人鬼鬼祟祟从当铺后门出来",
+        "没看清那人的脸，怕惹麻烦没敢声张"
+      ]
+    },
+    {
+      "name": "苏捕头",
+      "role": "片区捕快",
+      "personality": "干练果决，观察力敏锐，公正严明，做事雷厉风行。",
+      "appearance": "女捕快，头戴黑色捕快帽，穿藏青色捕快公服，腰间挂着佩刀，束着高马尾，脚蹬黑布靴。",
+      "appearanceHint": "穿着公服，腰挂佩刀，看着像是当差办差的人。",
+      "motivation": "查清当铺失窃案，将小偷捉拿归案，维护夜市治安。",
+      "socialStyle": "ambivert，平时话不多，查案时问话犀利，逻辑清晰。",
+      "initialMemories": [
+        "刚接到消息说当铺的王掌柜丢了贵重物品",
+        "正准备动身去当铺了解具体失窃情况",
+        "最近这一片已经发生了三起小偷窃案，还没抓到嫌疑人"
+      ]
+    },
+    {
+      "name": "陈阿狗",
+      "role": "偷窃当铺的小偷",
+      "personality": "谨慎小心，话少寡言，手脚麻利，靠小偷小摸维持生计，很少漏破绽。",
+      "appearance": "小偷，穿灰黑色粗布短打，衣着质朴，腰间挂着一个布包袱，看上去和普通市井百姓没有区别。",
+      "appearanceHint": "穿着普通粗布衣服，沉默寡言，很少主动和人搭话。",
+      "motivation": "把偷来的典当品尽快出手，不要被人发现自己的偷窃行为。",
+      "socialStyle": "introvert，尽量避开人群和官差，不主动和陌生人交流。",
+      "initialMemories": [
+        "昨天晚上趁当铺打烊溜进去偷了三件值钱的典当品",
+        "现在正藏在夜市里找下家出货",
+        "觉得没人看到自己偷窃的过程，不会被发现"
+      ]
+    },
+    {
+      "name": "张老醉",
+      "role": "夜市常客酒鬼",
+      "personality": "整日醉醺醺的，说话颠三倒四，记性差，爱拉着人闲聊。",
+      "appearance": "酒鬼，头发凌乱，穿洗得发白的蓝色短打，身上满是酒渍，手里拿着一个旧酒葫芦。",
+      "appearanceHint": "走路摇摇晃晃，身上带着浓重酒气，看着像是喝多了的人。",
+      "motivation": "喝到更多的酒，每天都能醉醺醺的不用操心烦心事。",
+      "socialStyle": "extrovert，喝醉了就爱拉着路过的人说话，不管对方愿不愿意听。",
+      "initialMemories": [
+        "今天已经喝了三斤米酒，脑子昏沉沉的记不清事",
+        "昨天晚上喝醉了坐在当铺门口，看到有个人慌慌张张从当铺里跑出来",
+        "记不清那人长什么样了，只记得他穿的是灰黑色的衣服"
+      ]
+    },
+    {
+      "name": "林小夏",
+      "role": "现代穿越来的网红",
+      "personality": "好奇心强，活泼外向，喜欢新鲜事物，适应能力强，遇到新奇事物就想拍下来。",
+      "appearance": "留着飘逸的长发，穿现代白色连衣裙，背着白色帆布包，手里拿着智能手机，衣着与古人完全不同。",
+      "appearanceHint": "留着长头发，穿着样式奇特的衣服，手里拿着个从没见过的黑色小方块，看着很新奇。",
+      "motivation": "探索宋朝夜市的风土人情，拍视频记录下来，想办法回到现代。",
+      "socialStyle": "extrovert，对什么都好奇，喜欢和人搭话问东问西。",
+      "initialMemories": [
+        "自己本来正在拍宋朝文化主题的短视频，一睁眼就到了这里",
+        "身边的人全穿着古代人的衣服，说的也是古汉语",
+        "手机还有满格电，但是没有任何信号"
+      ]
+    }
+  ],
+  "multiDay": {
+    "enabled": true,
+    "endOfDayText": "夜市灯火渐次熄灭，摊贩们收拾货担陆续归家，街市慢慢沉寂下来。",
+    "newDayText": "暮色四合，华灯初上，汴京城的夜市又热热闹闹地开了张。",
+    "nextDayStartTime": "19:00"
+  },
+  "locations": [
+    {
+      "id": "pawn_shop",
+      "name": "当铺",
+      "description": "经营典当业务的临街店铺。",
+      "expectedObjects": [
+        "木质柜台",
+        "储物货架",
+        "铜制算盘"
+      ],
+      "interactions": [
+        {
+          "id": "browse_pawned_goods",
+          "name": "浏览典当品",
+          "description": "浏览当铺内陈列的各类典当物品。",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 2,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "curiosity",
+              "value": 5
+            }
+          ],
+          "repeatable": true
+        },
+        {
+          "id": "pawn_item",
+          "name": "典当物品",
+          "description": "将随身物品典当给掌柜换取银两。",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 3,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "money",
+              "value": 20
+            },
+            {
+              "type": "character_need",
+              "target": "satisfaction",
+              "value": 5
+            }
+          ],
+          "repeatable": true,
+          "requiresAnchor": true
+        }
+      ]
+    }
+  ]
+}

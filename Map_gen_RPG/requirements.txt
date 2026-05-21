@@ -1,0 +1,2 @@
+# 阶段 E：拼图 ref_collage.png
+Pillow>=10.0.0

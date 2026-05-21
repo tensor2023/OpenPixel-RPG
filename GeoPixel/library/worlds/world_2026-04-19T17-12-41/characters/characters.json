@@ -1,0 +1,44 @@
+[
+  {
+    "id": "char_1776618841565",
+    "name": "Tobias",
+    "description": "Wandering peddler, scruffy brown hair, worn patched canvas coat, empty wicker basket slung over shoulder, scuffed leather boots.",
+    "createdAt": "2026-04-19T17:14:16.700Z"
+  },
+  {
+    "id": "char_1776618856794",
+    "name": "Elara",
+    "description": "Village healer, long braided auburn hair, linen dress dyed pale green, leather pouch full of dried herbs at waist, calloused bare feet.",
+    "createdAt": "2026-04-19T17:14:33.236Z"
+  },
+  {
+    "id": "char_1776618873346",
+    "name": "Gareth",
+    "description": "Village blacksmith, bald with bushy grey beard, muscular arms covered in soot stains, thick leather apron, heavy iron hammer hanging at hip.",
+    "createdAt": "2026-04-19T17:14:51.185Z"
+  },
+  {
+    "id": "char_1776618891290",
+    "name": "Lira",
+    "description": "Wandering bard, curly bright red hair, bright yellow tunic with frills, small wooden lute slung over back, colorful ribbons braided in hair.",
+    "createdAt": "2026-04-19T17:15:07.660Z"
+  },
+  {
+    "id": "char_1776618907756",
+    "name": "Milo",
+    "description": "Village child, messy blonde hair, patched brown tunic, too-large leather boots, holds a crudely carved wooden sword.",
+    "createdAt": "2026-04-19T17:15:24.948Z"
+  },
+  {
+    "id": "char_1776618925039",
+    "name": "Owen",
+    "description": "Village guard, short brown hair, dented iron armor, worn blue village tabard, spear in hand, leather helmet with a feather on top.",
+    "createdAt": "2026-04-19T17:15:39.628Z"
+  },
+  {
+    "id": "char_1776618939731",
+    "name": "Alaric",
+    "description": "Village chief, long white hair and beard, loose dark blue robe, wooden staff carved with hero's symbol, wire-rimmed glasses perched on nose.",
+    "createdAt": "2026-04-19T17:15:56.769Z"
+  }
+]

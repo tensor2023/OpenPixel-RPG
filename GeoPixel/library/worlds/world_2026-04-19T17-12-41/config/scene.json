@@ -1,0 +1,17 @@
+{
+  "sceneType": "open",
+  "startTime": "08:00",
+  "tickDurationMinutes": 15,
+  "maxTicks": 48,
+  "displayFormat": "fantasy",
+  "description": "A pixel-art RPG village where residents are figuring out new life purpose after the hero saved the world and left. A grand stone statue of the hero stands in the central plaza, with every corner holding traces of the past adventure era.",
+  "multiDay": {
+    "enabled": true,
+    "endOfDayText": "The sun dips below the hills, villagers lock up their homes and return indoors for the night.",
+    "newDayText": "The rooster crows at dawn, the village wakes up to another quiet peaceful day.",
+    "nextDayStartTime": "08:00"
+  },
+  "worldName": "Post-Victory Pixel Hamlet",
+  "worldDescription": "A pixel-art RPG village where residents are figuring out new life purpose after the hero saved the world and left. A grand stone statue of the hero stands in the central plaza, with every corner holding traces of the past adventure era.",
+  "characterCount": 7
+}

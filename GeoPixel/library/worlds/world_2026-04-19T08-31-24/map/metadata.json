@@ -1,0 +1,49 @@
+{
+  "runId": "2026-04-19T08-32-35",
+  "userPrompt": "正上方俯视的工笔画风格夜市，青石板主街横贯画面，两侧排布木制建筑与摊位，暖黄配色。",
+  "startedAt": "2026-04-19T08:32:35.214Z",
+  "steps": {
+    "step1": {
+      "imageSize": "2K",
+      "width": 2752,
+      "height": 1536,
+      "bytes": 3981035,
+      "reviewPassed": true,
+      "attempts": 2
+    },
+    "step2": {
+      "width": 2752,
+      "height": 1536,
+      "originalBytes": 3981035,
+      "compressedBytes": 2491935,
+      "savedBytes": 1489100,
+      "strategy": "low_loss_palette_png"
+    },
+    "step3": {
+      "source": "world_design",
+      "preparedRegionCount": 1,
+      "regionCount": 1,
+      "reviewPassed": true,
+      "attempts": 1,
+      "droppedRegionIds": []
+    },
+    "step3_2": {
+      "elementCount": 2,
+      "reviewPassed": true,
+      "attempts": 1,
+      "droppedElementIds": []
+    },
+    "step4": {
+      "bytes": 930696,
+      "reviewPassed": true,
+      "attempts": 1
+    },
+    "step5": {
+      "gridWidth": 344,
+      "gridHeight": 192,
+      "tileSize": 8
+    }
+  },
+  "warnings": [],
+  "completedAt": "2026-04-19T08:35:02.248Z"
+}

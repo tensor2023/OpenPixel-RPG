@@ -1,0 +1,36 @@
+{
+  "id": "char_1776618939731",
+  "name": "Alaric",
+  "description": "Village chief, long white hair and beard, loose dark blue robe, wooden staff carved with hero's symbol, wire-rimmed glasses perched on nose.",
+  "createdAt": "2026-04-19T17:15:56.769Z",
+  "frameWidth": 170,
+  "frameHeight": 204,
+  "columns": 6,
+  "rows": 5,
+  "animations": {
+    "walk-left": {
+      "start": 0,
+      "end": 5,
+      "frameRate": 8
+    },
+    "walk-down": {
+      "start": 6,
+      "end": 11,
+      "frameRate": 8
+    },
+    "walk-up": {
+      "start": 12,
+      "end": 17,
+      "frameRate": 8
+    },
+    "idle-front": {
+      "frame": 18
+    },
+    "idle-back": {
+      "frame": 19
+    },
+    "idle-left": {
+      "frame": 20
+    }
+  }
+}

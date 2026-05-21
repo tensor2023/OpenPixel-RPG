@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Baidu Map 3D Whitebox</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    html, body { width: 1280px; height: 960px; overflow: hidden; }
+    #map { width: 1280px; height: 960px; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=iHSYKtpfzEpgXpfRPEhADHWZCpgZTuS3"></script>
+  <script>
+    // Central Park NYC: WGS84 40.7851, -73.9683
+    // Baidu Maps uses BD09 coordinate system; for outside China, convert manually
+    // BD09 offset for non-China is small, using approximate value
+    var map = new BMapGL.Map("map");
+
+    // Central Park NYC center in BD09 approximate coords
+    var point = new BMapGL.Point(-73.9618, 40.7912);
+    map.centerAndZoom(point, 17);
+
+    // Enable 3D buildings (white model / 白模)
+    map.enableScrollWheelZoom(true);
+
+    // Set isometric-like tilt for building visibility
+    map.setTilt(60);
+    map.setHeading(30);
+
+    // Set map style to white/grey building style
+    map.setMapStyleV2({
+      styleId: 'aee1534c8cb68f5e6cc2d6e2a7f0e7ed'  // default clean style
+    });
+
+    // Mark ready for screenshot
+    map.addEventListener('tilesloaded', function() {
+      document.title = 'READY';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "id": "char_1776587577456",
+  "name": "李半仙",
+  "description": "算命先生，头戴黑色方巾，穿灰蓝色道袍，留山羊胡，手里握着拂尘。",
+  "createdAt": "2026-04-19T08:33:16.749Z",
+  "frameWidth": 170,
+  "frameHeight": 204,
+  "columns": 6,
+  "rows": 5,
+  "animations": {
+    "walk-left": {
+      "start": 0,
+      "end": 5,
+      "frameRate": 8
+    },
+    "walk-down": {
+      "start": 6,
+      "end": 11,
+      "frameRate": 8
+    },
+    "walk-up": {
+      "start": 12,
+      "end": 17,
+      "frameRate": 8
+    },
+    "idle-front": {
+      "frame": 18
+    },
+    "idle-back": {
+      "frame": 19
+    },
+    "idle-left": {
+      "frame": 20
+    }
+  }
+}

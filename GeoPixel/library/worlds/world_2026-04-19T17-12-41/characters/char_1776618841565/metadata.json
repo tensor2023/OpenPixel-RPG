@@ -1,0 +1,36 @@
+{
+  "id": "char_1776618841565",
+  "name": "Tobias",
+  "description": "Wandering peddler, scruffy brown hair, worn patched canvas coat, empty wicker basket slung over shoulder, scuffed leather boots.",
+  "createdAt": "2026-04-19T17:14:16.700Z",
+  "frameWidth": 170,
+  "frameHeight": 204,
+  "columns": 6,
+  "rows": 5,
+  "animations": {
+    "walk-left": {
+      "start": 0,
+      "end": 5,
+      "frameRate": 8
+    },
+    "walk-down": {
+      "start": 6,
+      "end": 11,
+      "frameRate": 8
+    },
+    "walk-up": {
+      "start": 12,
+      "end": 17,
+      "frameRate": 8
+    },
+    "idle-front": {
+      "frame": 18
+    },
+    "idle-back": {
+      "frame": 19
+    },
+    "idle-left": {
+      "frame": 20
+    }
+  }
+}

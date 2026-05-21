@@ -1,0 +1,49 @@
+{
+  "runId": "2026-04-19T17-14-01",
+  "userPrompt": "High fantasy RPG village, pixel art style, central plaza surrounded by west-side forge, east-side healer cottage, scattered small houses along dirt roads.",
+  "startedAt": "2026-04-19T17:14:01.598Z",
+  "steps": {
+    "step1": {
+      "imageSize": "2K",
+      "width": 2752,
+      "height": 1536,
+      "bytes": 2892262,
+      "reviewPassed": true,
+      "attempts": 1
+    },
+    "step2": {
+      "width": 2752,
+      "height": 1536,
+      "originalBytes": 2892262,
+      "compressedBytes": 1848106,
+      "savedBytes": 1044156,
+      "strategy": "low_loss_palette_png"
+    },
+    "step3": {
+      "source": "world_design",
+      "preparedRegionCount": 3,
+      "regionCount": 3,
+      "reviewPassed": true,
+      "attempts": 1,
+      "droppedRegionIds": []
+    },
+    "step3_2": {
+      "elementCount": 0,
+      "reviewPassed": true,
+      "attempts": 0,
+      "droppedElementIds": []
+    },
+    "step4": {
+      "bytes": 1631677,
+      "reviewPassed": true,
+      "attempts": 4
+    },
+    "step5": {
+      "gridWidth": 344,
+      "gridHeight": 192,
+      "tileSize": 8
+    }
+  },
+  "warnings": [],
+  "completedAt": "2026-04-19T17:17:12.134Z"
+}

@@ -1,0 +1,17 @@
+{
+  "sceneType": "open",
+  "startTime": "19:00",
+  "tickDurationMinutes": 15,
+  "maxTicks": 28,
+  "displayFormat": "ancient_chinese",
+  "description": "这是夜晚的宋朝繁华夜市，采用精美的古代工笔画风格。宽敞青石板路两侧排布着各式小房子与摊位，仅当铺可进入，算命铺、菩萨像可供交互。各色人等往来其间，暗藏着当铺失窃的小秘密。",
+  "multiDay": {
+    "enabled": true,
+    "endOfDayText": "夜市灯火渐次熄灭，摊贩们收拾货担陆续归家，街市慢慢沉寂下来。",
+    "newDayText": "暮色四合，华灯初上，汴京城的夜市又热热闹闹地开了张。",
+    "nextDayStartTime": "19:00"
+  },
+  "worldName": "汴京夜肆",
+  "worldDescription": "这是夜晚的宋朝繁华夜市，采用精美的古代工笔画风格。宽敞青石板路两侧排布着各式小房子与摊位，仅当铺可进入，算命铺、菩萨像可供交互。各色人等往来其间，暗藏着当铺失窃的小秘密。",
+  "characterCount": 6
+}

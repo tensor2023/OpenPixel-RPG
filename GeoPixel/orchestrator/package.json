@@ -1,0 +1,13 @@
+{
+  "name": "geopixel-orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "sharp": "^0.32.6"
+  }
+}

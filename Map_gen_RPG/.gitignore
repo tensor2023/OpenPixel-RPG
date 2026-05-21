@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.runtime-refs-local/
+# 阶段 B/C 生成图（需要时可强制 add）
+runtime-refs/*.png
+runtime-refs/*.jpg

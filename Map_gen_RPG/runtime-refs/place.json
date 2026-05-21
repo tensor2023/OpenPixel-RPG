@@ -1,0 +1,24 @@
+{
+  "placeQuery": "同济大学四平路校区",
+  "formattedAddress": "50 Chi Feng Lu, Yang Pu Qu, Shang Hai Shi, China, 200092",
+  "lat": 31.283136,
+  "lng": 121.500834,
+  "bbox": {
+    "south": 31.2819685197085,
+    "west": 121.4995780197085,
+    "north": 31.2846664802915,
+    "east": 121.5022759802915
+  },
+  "locationType": "ROOFTOP",
+  "viewport": {
+    "northeast": {
+      "lat": 31.2846664802915,
+      "lng": 121.5022759802915
+    },
+    "southwest": {
+      "lat": 31.2819685197085,
+      "lng": 121.4995780197085
+    }
+  },
+  "placeId": "ChIJ26vj7nxxsjURrDOnTLmp4HQ"
+}

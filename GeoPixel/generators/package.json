@@ -1,0 +1,14 @@
+{
+  "name": "geopixel-generators",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "map:start": "node map/src/index.mjs",
+    "character:start": "node character/src/index.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "sharp": "^0.32.6"
+  }
+}

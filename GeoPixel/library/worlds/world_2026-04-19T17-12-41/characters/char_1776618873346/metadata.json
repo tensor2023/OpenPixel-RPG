@@ -1,0 +1,36 @@
+{
+  "id": "char_1776618873346",
+  "name": "Gareth",
+  "description": "Village blacksmith, bald with bushy grey beard, muscular arms covered in soot stains, thick leather apron, heavy iron hammer hanging at hip.",
+  "createdAt": "2026-04-19T17:14:51.185Z",
+  "frameWidth": 170,
+  "frameHeight": 204,
+  "columns": 6,
+  "rows": 5,
+  "animations": {
+    "walk-left": {
+      "start": 0,
+      "end": 5,
+      "frameRate": 8
+    },
+    "walk-down": {
+      "start": 6,
+      "end": 11,
+      "frameRate": 8
+    },
+    "walk-up": {
+      "start": 12,
+      "end": 17,
+      "frameRate": 8
+    },
+    "idle-front": {
+      "frame": 18
+    },
+    "idle-back": {
+      "frame": 19
+    },
+    "idle-left": {
+      "frame": 20
+    }
+  }
+}

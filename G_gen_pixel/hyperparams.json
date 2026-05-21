@@ -1,0 +1,21 @@
+{
+  "GRID_CELLS": 32,
+  "METERS_PER_CELL": 0.5,
+  "CANVAS_SIZE": 256,
+  "CAMERA_AZIMUTH": -15,
+  "CAMERA_ELEVATION": -45,
+  "TARGET_HEIGHT": 0,
+
+  "_note": [
+    "GRID_CELLS: game grid dimension (64/128/256). Must satisfy CANVAS_SIZE/(GRID_CELLS*4) ∈ {1,2,4}.",
+    "  64  → 4K GeoPixel mode (16px/tile) — light, recommended for small servers",
+    "  128 → 2K GeoPixel mode (8px/tile)  — medium",
+    "  256 → 1K GeoPixel mode (4px/tile)  — heavy, like the demo worlds",
+    "METERS_PER_CELL: real-world metres each grid cell represents.",
+    "  VIEW_HEIGHT_METERS (derived) = GRID_CELLS × METERS_PER_CELL",
+    "  64 cells × 2 m = 128 m capture area (a city block)",
+    "CANVAS_SIZE: pixel resolution of the 3D-tiles capture (keep 1024 for quality).",
+    "CAMERA_AZIMUTH/ELEVATION: isometric camera angle in degrees.",
+    "TARGET_HEIGHT: geoid offset in metres (0 works for most locations)."
+  ]
+}

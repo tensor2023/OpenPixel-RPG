@@ -1,0 +1,491 @@
+{
+  "worldName": "汴京夜肆",
+  "worldDescription": "这是夜晚的宋朝繁华夜市，采用精美的古代工笔画风格。宽敞青石板路两侧排布着各式小房子与摊位，仅当铺可进入，算命铺、菩萨像可供交互。各色人等往来其间，暗藏着当铺失窃的小秘密。",
+  "worldSocialContext": "这是北宋汴京的市井夜市，往来多是本地居民与过路客商，陌生人搭话多从买卖、问路开始，市井消息传播速度快，人们对新鲜事物好奇心重。",
+  "contentLanguage": "zh",
+  "scene": {
+    "sceneType": "open",
+    "startTime": "19:00",
+    "tickDurationMinutes": 15,
+    "maxTicks": 28,
+    "displayFormat": "ancient_chinese",
+    "description": "这是夜晚的宋朝繁华夜市，采用精美的古代工笔画风格。宽敞青石板路两侧排布着各式小房子与摊位，仅当铺可进入，算命铺、菩萨像可供交互。各色人等往来其间，暗藏着当铺失窃的小秘密。",
+    "multiDay": {
+      "enabled": true,
+      "endOfDayText": "夜市灯火渐次熄灭，摊贩们收拾货担陆续归家，街市慢慢沉寂下来。",
+      "newDayText": "暮色四合，华灯初上，汴京城的夜市又热热闹闹地开了张。",
+      "nextDayStartTime": "19:00"
+    }
+  },
+  "worldActions": [
+    {
+      "id": "stroll_along_street",
+      "name": "沿街闲逛",
+      "description": "沿着青石板主街闲逛，观赏夜市各处景致。",
+      "availableWhenState": [
+        "available"
+      ],
+      "duration": 2,
+      "effects": [
+        {
+          "type": "character_need",
+          "target": "curiosity",
+          "value": 8
+        }
+      ],
+      "repeatable": true
+    },
+    {
+      "id": "buy_street_snack",
+      "name": "买街头小吃",
+      "description": "从街边普通小吃摊购买一份特色市井小吃。",
+      "availableWhenState": [
+        "available"
+      ],
+      "duration": 1,
+      "effects": [
+        {
+          "type": "character_need",
+          "target": "hunger",
+          "value": -15
+        },
+        {
+          "type": "character_need",
+          "target": "happiness",
+          "value": 10
+        }
+      ],
+      "repeatable": true
+    }
+  ],
+  "locations": [
+    {
+      "id": "main_area",
+      "name": "主区域",
+      "description": "这是夜晚的宋朝繁华夜市，采用精美的古代工笔画风格。宽敞青石板路两侧排布着各式小房子与摊位，仅当铺可进入，算命铺、菩萨像可供交互。各色人等往来其间，暗藏着当铺失窃的小秘密。",
+      "adjacentLocations": [
+        "pawn_shop"
+      ],
+      "objects": [
+        {
+          "id": "fortune_telling_stall",
+          "name": "算命铺子",
+          "locationId": "main_area",
+          "defaultState": "available",
+          "capacity": 2,
+          "interactions": [
+            {
+              "id": "tell_fortune",
+              "name": "算运势",
+              "description": "找算命先生测算近期运势吉凶。",
+              "availableWhenState": [
+                "available"
+              ],
+              "duration": 3,
+              "effects": [
+                {
+                  "type": "character_need",
+                  "target": "curiosity",
+                  "value": -5
+                },
+                {
+                  "type": "character_need",
+                  "target": "peace",
+                  "value": 10
+                }
+              ],
+              "repeatable": true,
+              "requiresAnchor": true
+            },
+            {
+              "id": "look_at_props",
+              "name": "看算命道具",
+              "description": "翻看摊位上摆放的各类算命道具。",
+              "availableWhenState": [
+                "available"
+              ],
+              "duration": 1,
+              "effects": [
+                {
+                  "type": "character_need",
+                  "target": "curiosity",
+                  "value": 3
+                }
+              ],
+              "repeatable": true
+            }
+          ]
+        },
+        {
+          "id": "bodhisattva_statue",
+          "name": "菩萨像",
+          "locationId": "main_area",
+          "defaultState": "available",
+          "capacity": 2,
+          "interactions": [
+            {
+              "id": "worship_bodhisattva",
+              "name": "祭拜祈福",
+              "description": "向菩萨像祭拜，祈求心愿达成。",
+              "availableWhenState": [
+                "available"
+              ],
+              "duration": 2,
+              "effects": [
+                {
+                  "type": "character_need",
+                  "target": "peace",
+                  "value": 15
+                }
+              ],
+              "repeatable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pawn_shop",
+      "name": "当铺",
+      "description": "经营典当业务的临街店铺。",
+      "adjacentLocations": [
+        "main_area"
+      ],
+      "objects": [
+        {
+          "id": "browse_pawned_goods",
+          "name": "浏览典当品",
+          "locationId": "pawn_shop",
+          "defaultState": "available",
+          "capacity": 2,
+          "interactions": [
+            {
+              "id": "browse_pawned_goods",
+              "name": "浏览典当品",
+              "description": "浏览当铺内陈列的各类典当物品。",
+              "availableWhenState": [
+                "available"
+              ],
+              "duration": 2,
+              "effects": [
+                {
+                  "type": "character_need",
+                  "target": "curiosity",
+                  "value": 5
+                }
+              ],
+              "repeatable": true
+            }
+          ]
+        },
+        {
+          "id": "pawn_item",
+          "name": "典当物品",
+          "locationId": "pawn_shop",
+          "defaultState": "available",
+          "capacity": 2,
+          "interactions": [
+            {
+              "id": "pawn_item",
+              "name": "典当物品",
+              "description": "将随身物品典当给掌柜换取银两。",
+              "availableWhenState": [
+                "available"
+              ],
+              "duration": 3,
+              "effects": [
+                {
+                  "type": "character_need",
+                  "target": "money",
+                  "value": 20
+                },
+                {
+                  "type": "character_need",
+                  "target": "satisfaction",
+                  "value": 5
+                }
+              ],
+              "repeatable": true,
+              "requiresAnchor": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "mainAreaPoints": [
+    {
+      "id": "main_area_point_1",
+      "name": "主区域点位1",
+      "x": 1404,
+      "y": 732,
+      "adjacentPointIds": [
+        "main_area_point_24"
+      ]
+    },
+    {
+      "id": "main_area_point_2",
+      "name": "主区域点位2",
+      "x": 60,
+      "y": 844,
+      "adjacentPointIds": [
+        "main_area_point_23"
+      ]
+    },
+    {
+      "id": "main_area_point_3",
+      "name": "主区域点位3",
+      "x": 2524,
+      "y": 1404,
+      "adjacentPointIds": [
+        "main_area_point_14"
+      ]
+    },
+    {
+      "id": "main_area_point_4",
+      "name": "主区域点位4",
+      "x": 732,
+      "y": 1404,
+      "adjacentPointIds": [
+        "main_area_point_21"
+      ]
+    },
+    {
+      "id": "main_area_point_5",
+      "name": "主区域点位5",
+      "x": 508,
+      "y": 172,
+      "adjacentPointIds": [
+        "main_area_point_17"
+      ]
+    },
+    {
+      "id": "main_area_point_6",
+      "name": "主区域点位6",
+      "x": 2188,
+      "y": 620,
+      "adjacentPointIds": [
+        "main_area_point_20"
+      ]
+    },
+    {
+      "id": "main_area_point_7",
+      "name": "主区域点位7",
+      "x": 1628,
+      "y": 1404,
+      "adjacentPointIds": [
+        "element_bodhisattva_statue",
+        "main_area_point_22"
+      ]
+    },
+    {
+      "id": "main_area_point_8",
+      "name": "主区域点位8",
+      "x": 1404,
+      "y": 60,
+      "adjacentPointIds": [
+        "main_area_point_16"
+      ]
+    },
+    {
+      "id": "main_area_point_9",
+      "name": "主区域点位9",
+      "x": 732,
+      "y": 732,
+      "adjacentPointIds": [
+        "main_area_point_19"
+      ]
+    },
+    {
+      "id": "main_area_point_10",
+      "name": "主区域点位10",
+      "x": 2636,
+      "y": 844,
+      "adjacentPointIds": [
+        "main_area_point_14"
+      ]
+    },
+    {
+      "id": "main_area_point_11",
+      "name": "主区域点位11",
+      "x": 1852,
+      "y": 956,
+      "adjacentPointIds": [
+        "main_area_point_18"
+      ]
+    },
+    {
+      "id": "main_area_point_12",
+      "name": "主区域点位12",
+      "x": 1068,
+      "y": 956,
+      "adjacentPointIds": [
+        "main_area_point_21"
+      ]
+    },
+    {
+      "id": "main_area_point_13",
+      "name": "主区域点位13",
+      "x": 508,
+      "y": 1068,
+      "adjacentPointIds": [
+        "main_area_point_23"
+      ]
+    },
+    {
+      "id": "main_area_point_14",
+      "name": "主区域点位14",
+      "x": 2300,
+      "y": 1068,
+      "adjacentPointIds": [
+        "main_area_point_10",
+        "main_area_point_3"
+      ]
+    },
+    {
+      "id": "main_area_point_15",
+      "name": "主区域点位15",
+      "x": 1516,
+      "y": 1068,
+      "adjacentPointIds": [
+        "main_area_point_18"
+      ]
+    },
+    {
+      "id": "main_area_point_16",
+      "name": "主区域点位16",
+      "x": 1740,
+      "y": 620,
+      "adjacentPointIds": [
+        "main_area_point_8"
+      ]
+    },
+    {
+      "id": "main_area_point_17",
+      "name": "主区域点位17",
+      "x": 284,
+      "y": 396,
+      "adjacentPointIds": [
+        "main_area_point_5"
+      ]
+    },
+    {
+      "id": "main_area_point_18",
+      "name": "主区域点位18",
+      "x": 1628,
+      "y": 844,
+      "adjacentPointIds": [
+        "main_area_point_11",
+        "main_area_point_15"
+      ]
+    },
+    {
+      "id": "main_area_point_19",
+      "name": "主区域点位19",
+      "x": 956,
+      "y": 620,
+      "adjacentPointIds": [
+        "main_area_point_9"
+      ]
+    },
+    {
+      "id": "main_area_point_20",
+      "name": "主区域点位20",
+      "x": 1964,
+      "y": 732,
+      "adjacentPointIds": [
+        "element_fortune_telling_stall",
+        "main_area_point_6"
+      ]
+    },
+    {
+      "id": "main_area_point_21",
+      "name": "主区域点位21",
+      "x": 844,
+      "y": 1068,
+      "adjacentPointIds": [
+        "main_area_point_12",
+        "main_area_point_4"
+      ]
+    },
+    {
+      "id": "main_area_point_22",
+      "name": "主区域点位22",
+      "x": 1852,
+      "y": 1292,
+      "adjacentPointIds": [
+        "main_area_point_7"
+      ]
+    },
+    {
+      "id": "main_area_point_23",
+      "name": "主区域点位23",
+      "x": 396,
+      "y": 844,
+      "adjacentPointIds": [
+        "main_area_point_13",
+        "main_area_point_2"
+      ]
+    },
+    {
+      "id": "main_area_point_24",
+      "name": "主区域点位24",
+      "x": 1180,
+      "y": 732,
+      "adjacentPointIds": [
+        "main_area_point_1"
+      ]
+    },
+    {
+      "id": "element_fortune_telling_stall",
+      "name": "算命铺子附近",
+      "x": 1892,
+      "y": 756,
+      "adjacentPointIds": [
+        "main_area_point_20"
+      ]
+    },
+    {
+      "id": "element_bodhisattva_statue",
+      "name": "菩萨像附近",
+      "x": 1724,
+      "y": 1468,
+      "adjacentPointIds": [
+        "main_area_point_7"
+      ]
+    }
+  ],
+  "worldSize": {
+    "width": 2752,
+    "height": 1536,
+    "tileSize": 8,
+    "gridWidth": 344,
+    "gridHeight": 192
+  },
+  "metadata": {
+    "worldName": "汴京夜肆",
+    "worldDescription": "这是夜晚的宋朝繁华夜市，采用精美的古代工笔画风格。宽敞青石板路两侧排布着各式小房子与摊位，仅当铺可进入，算命铺、菩萨像可供交互。各色人等往来其间，暗藏着当铺失窃的小秘密。",
+    "worldSocialContext": "这是北宋汴京的市井夜市，往来多是本地居民与过路客商，陌生人搭话多从买卖、问路开始，市井消息传播速度快，人们对新鲜事物好奇心重。",
+    "sceneType": "open",
+    "timeConfig": {
+      "startTime": "19:00",
+      "tickDurationMinutes": 15,
+      "maxTicks": 28,
+      "displayFormat": "ancient_chinese"
+    },
+    "multiDay": {
+      "enabled": true,
+      "endOfDayText": "夜市灯火渐次熄灭，摊贩们收拾货担陆续归家，街市慢慢沉寂下来。",
+      "newDayText": "暮色四合，华灯初上，汴京城的夜市又热热闹闹地开了张。",
+      "nextDayStartTime": "19:00"
+    },
+    "mapPlan": {
+      "buildingMode": "mostly_scenic",
+      "compositionNotes": "中央青石板主街横贯左右，建筑与摊位沿两侧分布。",
+      "worldFunctionSummary": "供人闲逛、交易、社交的北宋市井夜市。",
+      "regionDesignNotes": "主街左侧当铺为唯一可进入建筑，其余互动元素分布在主街两侧。"
+    },
+    "originalPrompt": "夜晚的宋朝繁华夜市，宽敞的石板路两边有各种小房子、小铺子，有当铺掌柜、算命先生、捕快、小偷、酒鬼、一个刚从现代穿越来的网红"
+  },
+  "originalPrompt": "夜晚的宋朝繁华夜市，宽敞的石板路两边有各种小房子、小铺子，有当铺掌柜、算命先生、捕快、小偷、酒鬼、一个刚从现代穿越来的网红"
+}

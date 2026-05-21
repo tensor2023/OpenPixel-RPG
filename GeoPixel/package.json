@@ -1,0 +1,26 @@
+{
+  "name": "geopixel",
+  "version": "0.1.0",
+  "private": true,
+  "repository": "git@github.com:YGYOOO/GeoPixel.git",
+  "type": "module",
+  "scripts": {
+    "postinstall": "cd client && npm install && cd ../server && npm install && cd ../orchestrator && npm install && cd ../generators && npm install",
+    "create": "node orchestrator/src/index.mjs",
+    "dev": "node scripts/dev.mjs",
+    "stop": "node scripts/stop-dev.mjs",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "compare:models": "node scripts/compare-models.mjs",
+    "demo:region-overlay": "node generators/map/src/demo-region-overlay.mjs",
+    "generate:map": "node generators/map/src/index.mjs",
+    "generate:character": "node generators/character/src/index.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "typescript": "^5.7.3"
+  }
+}

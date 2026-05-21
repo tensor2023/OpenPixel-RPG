@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel Map Generator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f1117;
+      color: #e0e0e0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    header {
+      background: #1a1d2e;
+      border-bottom: 1px solid #2d3154;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #7c9ef5;
+      white-space: nowrap;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid #2d3154;
+      background: #0f1117;
+      color: #e0e0e0;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-bar input:focus {
+      border-color: #7c9ef5;
+    }
+
+    .search-bar input::placeholder {
+      color: #555;
+    }
+
+    button {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-load {
+      background: #2d3154;
+      color: #7c9ef5;
+      border: 1px solid #3d4470;
+    }
+
+    .btn-load:hover:not(:disabled) {
+      background: #3d4470;
+    }
+
+    .upload-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .upload-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      background: #1a1d2e;
+      border: 1px solid #3d4470;
+      border-radius: 6px;
+      list-style: none;
+      margin: 0;
+      padding: 4px 0;
+      min-width: 220px;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .upload-menu.open {
+      display: block;
+    }
+
+    .upload-menu li button {
+      width: 100%;
+      text-align: left;
+      padding: 8px 14px;
+      background: transparent;
+      color: #7c9ef5;
+      border: none;
+      border-radius: 0;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .upload-menu li button:hover {
+      background: #2d3154;
+    }
+
+    .btn-generate {
+      background: #7c9ef5;
+      color: #0f1117;
+      font-weight: 600;
+    }
+
+    .btn-generate:hover:not(:disabled) {
+      background: #9cb3ff;
+    }
+
+    .btn-generate-global {
+      background: #2d6a4f;
+      color: #74c69d;
+      font-weight: 600;
+      border: 1px solid #40916c;
+      white-space: nowrap;
+    }
+
+    .btn-generate-global:hover:not(:disabled) {
+      background: #40916c;
+      color: #fff;
+    }
+
+    .btn-geopixel {
+      background: #4caf50;
+      color: #fff;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .btn-geopixel:hover:not(:disabled) {
+      background: #66bb6a;
+    }
+
+    .btn-geopixel.enter-ready {
+      background: linear-gradient(120deg, #00b894, #00cec9);
+    }
+
+    .btn-geopixel.enter-ready:hover:not(:disabled) {
+      background: linear-gradient(120deg, #00cec9, #00b894);
+    }
+
+    .geopixel-status {
+      display: none;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-left: 8px;
+      max-width: 460px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .geopixel-status.running {
+      background: rgba(124,158,245,0.12);
+      color: #7c9ef5;
+      border: 1px solid #2d3154;
+    }
+
+    .geopixel-status.done {
+      background: rgba(76,175,80,0.12);
+      color: #66bb6a;
+      border: 1px solid #2d5430;
+    }
+
+    .geopixel-status.error {
+      background: rgba(255,107,107,0.12);
+      color: #ff6b6b;
+      border: 1px solid #5c2020;
+    }
+
+    .status-text {
+      font-size: 13px;
+      color: #888;
+      white-space: nowrap;
+    }
+
+    main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Left tool column — 1/6 of viewport */
+    .left-column {
+      width: 16.67%;
+      min-width: 160px;
+      max-width: 240px;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      border-right: 1px solid #2d3154;
+    }
+
+    /* Global map column — same size as left column */
+    .global-column {
+      width: 16.67%;
+      min-width: 160px;
+      max-width: 240px;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      border-right: 1px solid #2d3154;
+      border-left: 2px solid #40916c;
+    }
+
+    .mini-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .mini-panel + .mini-panel {
+      border-top: 1px solid #2d3154;
+    }
+
+    /* Game column — rest of viewport */
+    .game-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #game-frame {
+      flex: 1;
+      border: none;
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: #0a0c14;
+    }
+
+    .panel-header {
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #555;
+      background: #1a1d2e;
+      border-bottom: 1px solid #2d3154;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0c14;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #viewer-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    #viewer-canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: #333;
+    }
+
+    .placeholder-icon {
+      font-size: 48px;
+    }
+
+    .placeholder-text {
+      font-size: 14px;
+    }
+
+    #result-img {
+      max-width: 100%;
+      max-height: 100%;
+      image-rendering: pixelated;
+      display: none;
+    }
+
+    .loading-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    .loading-overlay.active {
+      display: flex;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #2d3154;
+      border-top-color: #7c9ef5;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      font-size: 14px;
+      color: #7c9ef5;
+    }
+
+    .tiles-status {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      font-size: 11px;
+      color: #555;
+      background: rgba(0,0,0,0.5);
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 13px;
+      padding: 8px 16px;
+      background: rgba(255,100,100,0.1);
+      border-radius: 6px;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .zoom-controls {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 5;
+    }
+
+    .btn-zoom {
+      width: 32px;
+      height: 32px;
+      background: rgba(26,29,46,0.9);
+      color: #7c9ef5;
+      border: 1px solid #2d3154;
+      border-radius: 6px;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-zoom:hover { background: #2d3154; }
+
+    .style-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 20px;
+      background: #13162a;
+      border-bottom: 1px solid #1e2240;
+      flex-shrink: 0;
+    }
+
+    .style-bar label {
+      font-size: 12px;
+      color: #555;
+      white-space: nowrap;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .style-bar input {
+      flex: 1;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid #1e2240;
+      background: #0f1117;
+      color: #c0c0c0;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .style-bar input:focus {
+      border-color: #3d4470;
+    }
+
+    .style-bar input::placeholder {
+      color: #333;
+    }
+
+    .btn-refresh {
+      background: transparent;
+      border: 1px solid #2d3154;
+      color: #7c9ef5;
+      font-size: 14px;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.6;
+      transition: opacity 0.15s;
+    }
+
+    .btn-refresh:hover {
+      opacity: 1;
+      background: #2d3154;
+    }
+
+    .btn-refresh-global {
+      color: #74c69d;
+      border-color: #40916c;
+    }
+
+    .btn-refresh-global:hover {
+      background: #2d6a4f;
+    }
+
+    /* Tutorial Modal */
+    .tutorial-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tutorial-overlay.active {
+      display: flex;
+    }
+
+    .tutorial-modal {
+      background: #1a1d2e;
+      border: 1px solid #2d3154;
+      border-radius: 12px;
+      width: 90vw;
+      max-width: 1000px;
+      height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    .tutorial-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid #2d3154;
+      flex-shrink: 0;
+    }
+
+    .tutorial-header h2 {
+      font-size: 18px;
+      color: #7c9ef5;
+      font-weight: 600;
+    }
+
+    .tutorial-close {
+      background: transparent;
+      border: 1px solid #2d3154;
+      color: #aaa;
+      font-size: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .tutorial-close:hover {
+      background: #2d3154;
+      color: #fff;
+    }
+
+    .tutorial-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 20px;
+      border-bottom: 1px solid #2d3154;
+      flex-shrink: 0;
+      background: #0f1117;
+    }
+
+    .tutorial-tab {
+      padding: 10px 20px;
+      font-size: 13px;
+      color: #888;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .tutorial-tab:hover {
+      color: #bbb;
+    }
+
+    .tutorial-tab.active {
+      color: #74c69d;
+      border-bottom-color: #74c69d;
+    }
+
+    .tutorial-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 28px;
+      line-height: 1.7;
+    }
+
+    .tutorial-body .tutorial-section {
+      display: none;
+    }
+
+    .tutorial-body .tutorial-section.active {
+      display: block;
+    }
+
+    .tutorial-body img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 12px 0;
+      border: 1px solid #2d3154;
+    }
+
+    .tutorial-body p {
+      margin-bottom: 10px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pixel Map Generator</h1>
+    <div class="search-bar">
+      <input type="text" id="location-input" placeholder="Enter location, e.g.: Tongji University" value="Tongji University" />
+      <button class="btn-load" id="btn-load">Load Map</button>
+      <div class="upload-dropdown" id="upload-dropdown">
+        <button class="btn-load" id="btn-upload">Upload ▾</button>
+        <ul class="upload-menu" id="upload-menu">
+          <li><button id="upload-option-photo3d">3D Photorealistic Image</button></li>
+          <li><button id="upload-option-pixel">Pixel Map</button></li>
+        </ul>
+      </div>
+      <input type="file" id="local-img-input" accept="image/*" style="display:none" />
+    </div>
+    <button class="btn-generate" id="btn-generate" disabled>Generate Pixel Map</button>
+    <button class="btn-generate-global" id="btn-generate-global" disabled title="Fetch OSM whitebox + 3D render → three-image pipeline → global pixel map">Generate Global Map</button>
+    <button class="btn-geopixel" id="btn-geopixel" disabled title="Available after pixel map is generated — auto-imports into GeoPixel to create a playable game">Generate GeoPixel Game</button>
+    <span class="geopixel-status" id="geopixel-status"></span>
+
+    <span class="status-text" id="status-text">Enter a location</span>
+  </header>
+
+  <div class="style-bar">
+    <label for="style-input">Pixel Style</label>
+    <input type="text" id="style-input"
+      placeholder="Leave blank for default (SimCity 3000 isometric 32-bit 256-color); or customize, e.g.: watercolor RPG map style, soft colors, hand-drawn outlines" />
+  </div>
+
+  <main>
+    <!-- Left column: 3D View + Pixel Map (1/6 width) -->
+    <div class="left-column">
+      <div class="mini-panel">
+        <div class="panel-header">3D View <button class="btn-refresh" id="btn-refresh-view" title="Refresh satellite image" style="display:none;">↻</button></div>
+        <div class="panel-content" id="viewer-panel">
+          <div class="placeholder" id="viewer-placeholder">
+            <div class="placeholder-icon" style="font-size:28px;">🏙️</div>
+            <div class="placeholder-text" style="font-size:11px;text-align:center;">Enter location<br>→ Load Map</div>
+          </div>
+          <div id="viewer-container" style="display:none; width:100%; height:100%;"></div>
+          <div id="satellite-view" style="display:none; width:100%; height:100%; overflow:hidden; position:relative; cursor:grab;">
+            <img id="satellite-img" style="position:absolute; object-fit:fill; transform-origin:center center;" alt="Satellite" />
+            <div id="satellite-crosshair" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:3;">
+              <svg width="32" height="32" viewBox="0 0 32 32">
+                <line x1="16" y1="0" x2="16" y2="10" stroke="#00ff88" stroke-width="1.5" opacity="0.8"/>
+                <line x1="16" y1="22" x2="16" y2="32" stroke="#00ff88" stroke-width="1.5" opacity="0.8"/>
+                <line x1="0" y1="16" x2="10" y2="16" stroke="#00ff88" stroke-width="1.5" opacity="0.8"/>
+                <line x1="22" y1="16" x2="32" y2="16" stroke="#00ff88" stroke-width="1.5" opacity="0.8"/>
+                <circle cx="16" cy="16" r="3" fill="none" stroke="#00ff88" stroke-width="1.5" opacity="0.8"/>
+              </svg>
+            </div>
+            <button id="btn-reset-pan" title="Reset pan" style="display:none; position:absolute; top:8px; right:56px; z-index:4; width:28px; height:28px; border-radius:4px; border:1px solid #2d3154; background:#1a1d2e; color:#7c9ef5; font-size:14px; cursor:pointer; line-height:1;">⟲</button>
+          </div>
+          <img id="local-img-preview" style="display:none; max-width:100%; max-height:100%; image-rendering:pixelated;" alt="Local map" />
+          <div class="loading-overlay" id="viewer-loading">
+            <div class="spinner"></div>
+            <div class="loading-text" id="viewer-loading-text" style="font-size:12px;">Loading...</div>
+          </div>
+          <div class="tiles-status" id="tiles-status" style="display:none;"></div>
+          <div class="zoom-controls" id="zoom-controls" style="display:none;">
+            <button class="btn-zoom" id="btn-zoom-in" title="Zoom in">+</button>
+            <button class="btn-zoom" id="btn-zoom-out" title="Zoom out">−</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-panel">
+        <div class="panel-header">Pixel Map <button class="btn-refresh" id="btn-refresh-pixel" title="Re-generate pixel map" style="display:none;">↻</button></div>
+        <div class="panel-content" id="result-panel">
+          <div class="placeholder" id="result-placeholder">
+            <div class="placeholder-icon" style="font-size:28px;">🎮</div>
+            <div class="placeholder-text" style="font-size:11px;text-align:center;">Generate pixel<br>map first</div>
+          </div>
+          <img id="result-img" alt="Generated pixel map" />
+          <div class="loading-overlay" id="result-loading">
+            <div class="spinner"></div>
+            <div class="loading-text" style="font-size:12px;">Generating...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Global Map column: whitebox + global pixel result -->
+    <div class="global-column">
+      <div class="mini-panel">
+        <div class="panel-header" style="color:#74c69d;">Whitebox (OSM) <button class="btn-refresh btn-refresh-global" id="btn-refresh-wb" title="Re-generate whitebox" style="display:none;">↻</button></div>
+        <div class="panel-content" id="wb-panel">
+          <div class="placeholder" id="wb-placeholder">
+            <div class="placeholder-icon" style="font-size:28px;">🏗️</div>
+            <div class="placeholder-text" style="font-size:11px;text-align:center;">Load map<br>→ Generate Global</div>
+          </div>
+          <img id="wb-img" style="display:none; max-width:100%; max-height:100%;" alt="Whitebox" />
+          <div class="loading-overlay" id="wb-loading">
+            <div class="spinner"></div>
+            <div class="loading-text" style="font-size:12px;">Fetching OSM...</div>
+          </div>
+        </div>
+      </div>
+      <div class="mini-panel">
+        <div class="panel-header" style="color:#74c69d;">Global Pixel Map <button class="btn-refresh btn-refresh-global" id="btn-refresh-global" title="Re-generate global pixel map" style="display:none;">↻</button></div>
+        <div class="panel-content" id="global-result-panel">
+          <div class="placeholder" id="global-result-placeholder">
+            <div class="placeholder-icon" style="font-size:28px;">🌍</div>
+            <div class="placeholder-text" style="font-size:11px;text-align:center;">Generate global<br>map first</div>
+          </div>
+          <img id="global-result-img" style="display:none; max-width:100%; max-height:100%; image-rendering:pixelated;" alt="Global pixel map" />
+          <div class="loading-overlay" id="global-result-loading">
+            <div class="spinner"></div>
+            <div class="loading-text" style="font-size:12px;">Generating...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column: GeoPixel game (4/6 width) -->
+    <div class="game-column">
+      <div class="panel-header">
+        <span>Game</span>
+        <div style="display:flex;gap:6px;">
+          <button id="btn-tutorial" style="font-size:11px;padding:2px 10px;background:#2d3154;color:#74c69d;border:1px solid #40916c;border-radius:4px;cursor:pointer;" title="Open tutorial">? Tutorial</button>
+          <button id="btn-refresh-game" style="font-size:11px;padding:2px 8px;background:#2d3154;color:#7c9ef5;border:1px solid #3d4470;border-radius:4px;cursor:pointer;">⟳ Refresh</button>
+        </div>
+      </div>
+      <iframe id="game-frame" src="http://localhost:3200" allowfullscreen></iframe>
+    </div>
+  </main>
+
+  <!-- Tutorial Modal -->
+  <div class="tutorial-overlay" id="tutorial-overlay">
+    <div class="tutorial-modal">
+      <div class="tutorial-header">
+        <h2>Tutorial</h2>
+        <button class="tutorial-close" id="btn-tutorial-close">&times;</button>
+      </div>
+      <div class="tutorial-tabs" id="tutorial-tabs">
+        <button class="tutorial-tab active" data-section="npc">Spawn NPC</button>
+        <button class="tutorial-tab" data-section="mode1">Mode 1: Upload Photo</button>
+        <button class="tutorial-tab" data-section="mode2">Mode 2: Manhattan</button>
+        <button class="tutorial-tab" data-section="mode3">Mode 3: Any Location</button>
+      </div>
+      <div class="tutorial-body" id="tutorial-body">
+        <div class="tutorial-section active" id="tutorial-npc"><p style="color:#888;">Loading...</p></div>
+        <div class="tutorial-section" id="tutorial-mode1"><p style="color:#888;">Loading...</p></div>
+        <div class="tutorial-section" id="tutorial-mode2"><p style="color:#888;">Loading...</p></div>
+        <div class="tutorial-section" id="tutorial-mode3"><p style="color:#888;">Loading...</p></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var overlay = document.getElementById('tutorial-overlay');
+      var btnOpen = document.getElementById('btn-tutorial');
+      var btnClose = document.getElementById('btn-tutorial-close');
+      var tabs = document.querySelectorAll('.tutorial-tab');
+      var sections = document.querySelectorAll('.tutorial-section');
+      var loaded = false;
+
+      function switchTab(sectionId) {
+        tabs.forEach(function(t) {
+          t.classList.toggle('active', t.dataset.section === sectionId);
+        });
+        sections.forEach(function(s) {
+          s.classList.toggle('active', s.id === 'tutorial-' + sectionId);
+        });
+      }
+
+      function loadTutorial() {
+        if (loaded) return;
+        loaded = true;
+        fetch('/api/tutorial')
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            data.sections.forEach(function(sec) {
+              var el = document.getElementById('tutorial-' + sec.id);
+              if (el) el.innerHTML = sec.html;
+            });
+          })
+          .catch(function(err) {
+            console.error('Failed to load tutorial:', err);
+            sections.forEach(function(s) { s.innerHTML = '<p style="color:#ff6b6b;">Failed to load tutorial.</p>'; });
+          });
+      }
+
+      btnOpen.addEventListener('click', function() {
+        overlay.classList.add('active');
+        loadTutorial();
+      });
+
+      btnClose.addEventListener('click', function() {
+        overlay.classList.remove('active');
+      });
+
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) overlay.classList.remove('active');
+      });
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          switchTab(tab.dataset.section);
+        });
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+          overlay.classList.remove('active');
+        }
+      });
+    })();
+  </script>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+[
+  {
+    "id": "fortune_telling_stall",
+    "name": "算命铺子",
+    "description": "路边算命小铺，可卜算个人运势吉凶。",
+    "visualDescription": "俯视小木桌，旁挂布幡",
+    "placementHint": "主街右侧中段",
+    "interactions": [
+      {
+        "id": "tell_fortune",
+        "name": "算运势",
+        "description": "找算命先生测算近期运势吉凶。",
+        "availableWhenState": [
+          "available"
+        ],
+        "duration": 3,
+        "effects": [
+          {
+            "type": "character_need",
+            "target": "curiosity",
+            "value": -5
+          },
+          {
+            "type": "character_need",
+            "target": "peace",
+            "value": 10
+          }
+        ],
+        "repeatable": true,
+        "requiresAnchor": true
+      },
+      {
+        "id": "look_at_props",
+        "name": "看算命道具",
+        "description": "翻看摊位上摆放的各类算命道具。",
+        "availableWhenState": [
+          "available"
+        ],
+        "duration": 1,
+        "effects": [
+          {
+            "type": "character_need",
+            "target": "curiosity",
+            "value": 3
+          }
+        ],
+        "repeatable": true
+      }
+    ],
+    "topLeft": {
+      "x": 1772,
+      "y": 532
+    },
+    "bottomRight": {
+      "x": 2012,
+      "y": 748
+    }
+  },
+  {
+    "id": "bodhisattva_statue",
+    "name": "菩萨像",
+    "description": "供路人祭拜祈福的石质菩萨像。",
+    "visualDescription": "俯视圆形石座，上有立像轮廓",
+    "placementHint": "主街南端",
+    "interactions": [
+      {
+        "id": "worship_bodhisattva",
+        "name": "祭拜祈福",
+        "description": "向菩萨像祭拜，祈求心愿达成。",
+        "availableWhenState": [
+          "available"
+        ],
+        "duration": 2,
+        "effects": [
+          {
+            "type": "character_need",
+            "target": "peace",
+            "value": 15
+          }
+        ],
+        "repeatable": true
+      }
+    ],
+    "topLeft": {
+      "x": 1572,
+      "y": 1164
+    },
+    "bottomRight": {
+      "x": 1868,
+      "y": 1460
+    }
+  }
+]

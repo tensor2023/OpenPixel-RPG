@@ -1,0 +1,393 @@
+{
+  "feasible": true,
+  "contentLanguage": "en",
+  "worldName": "Post-Victory Pixel Hamlet",
+  "worldDescription": "A pixel-art RPG village where residents are figuring out new life purpose after the hero saved the world and left. A grand stone statue of the hero stands in the central plaza, with every corner holding traces of the past adventure era.",
+  "worldSocialContext": "All residents have known each other for years from the era of monster attacks and hero quests. Now that the world is permanently safe, everyone is quietly uncertain about their life's purpose, and conversations often drift to stories of the hero's exploits.",
+  "mapDescription": "High fantasy RPG village, pixel art style, central plaza surrounded by west-side forge, east-side healer cottage, scattered small houses along dirt roads.",
+  "sceneType": "open",
+  "timeConfig": {
+    "startTime": "08:00",
+    "tickDurationMinutes": 15,
+    "maxTicks": 48,
+    "displayFormat": "fantasy"
+  },
+  "sceneTransitionText": {
+    "endOfDayText": "The sun dips below the hills, villagers lock up their homes and return indoors for the night.",
+    "newDayText": "The rooster crows at dawn, the village wakes up to another quiet peaceful day."
+  },
+  "mapPlan": {
+    "buildingMode": "mostly_scenic",
+    "compositionNotes": "Central plaza at core, forge to west, healer cottage to east, dirt roads radiating outwards.",
+    "worldFunctionSummary": "Small peaceful village for residents to socialize, work, and explore post-savior life.",
+    "regionDesignNotes": "Only the forge, healer cottage and central plaza are enterable, other small houses are non-enterable scenic decorations."
+  },
+  "worldActions": [
+    {
+      "id": "stroll_around_village",
+      "name": "Stroll Around the Village",
+      "description": "Wander along the village roads and observe the surrounding scenery and residents.",
+      "availableWhenState": [
+        "available"
+      ],
+      "duration": 2,
+      "effects": [
+        {
+          "type": "character_need",
+          "target": "curiosity",
+          "value": 8
+        }
+      ],
+      "repeatable": true
+    },
+    {
+      "id": "discuss_hero_stories",
+      "name": "Discuss Hero Stories",
+      "description": "Chat with nearby villagers about the hero's past adventures and victory.",
+      "availableWhenState": [
+        "available"
+      ],
+      "duration": 3,
+      "effects": [
+        {
+          "type": "character_need",
+          "target": "social",
+          "value": 10
+        }
+      ],
+      "repeatable": true
+    },
+    {
+      "id": "ponder_life_purpose",
+      "name": "Ponder Life Purpose",
+      "description": "Stand still and think about what to do in this already saved, peaceful world.",
+      "availableWhenState": [
+        "available"
+      ],
+      "duration": 2,
+      "effects": [
+        {
+          "type": "character_need",
+          "target": "mood",
+          "value": 5
+        }
+      ],
+      "repeatable": true
+    }
+  ],
+  "regions": [
+    {
+      "id": "central_plaza",
+      "name": "Central Plaza",
+      "description": "Open public space at the village core with the grand hero statue as its centerpiece.",
+      "type": "outdoor",
+      "enterable": true,
+      "shapeConstraint": "flexible",
+      "placementHint": "Center",
+      "visualDescription": "Square stone-paved area with a tall carved stone statue",
+      "expectedObjects": [
+        "hero_statue",
+        "wooden_benches"
+      ],
+      "interactions": [
+        {
+          "id": "admire_hero_statue",
+          "name": "Admire Hero Statue",
+          "description": "Stand in front of the statue and look at the hero's carved likeness.",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 1,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "nostalgia",
+              "value": 7
+            }
+          ],
+          "repeatable": true
+        }
+      ]
+    },
+    {
+      "id": "blacksmith_forge",
+      "name": "Blacksmith's Forge",
+      "description": "West-side workshop where the blacksmith once forged the hero's legendary sword, now makes household cutlery.",
+      "type": "building",
+      "enterable": true,
+      "shapeConstraint": "rectangular",
+      "placementHint": "West Side",
+      "visualDescription": "Rectangular stone building with a smoke vent on the roof",
+      "expectedObjects": [
+        "anvil",
+        "cooling_rack",
+        "stack_of_spoons"
+      ],
+      "interactions": [
+        {
+          "id": "browse_handmade_spoons",
+          "name": "Browse Handmade Spoons",
+          "description": "Look at the neatly stacked, well-crafted spoons the blacksmith has made.",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 1,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "curiosity",
+              "value": 5
+            }
+          ],
+          "repeatable": true
+        }
+      ]
+    },
+    {
+      "id": "healer_cottage",
+      "name": "Healer's Cottage",
+      "description": "East-side small cottage where the healer once treated wounded adventurers, now sits mostly unused.",
+      "type": "building",
+      "enterable": true,
+      "shapeConstraint": "rectangular",
+      "placementHint": "East Side",
+      "visualDescription": "Rectangular thatched-roof cottage with herb planters outside",
+      "expectedObjects": [
+        "herb_shelves",
+        "empty_patient_bed"
+      ],
+      "interactions": [
+        {
+          "id": "browse_herb_shelves",
+          "name": "Browse Herb Shelves",
+          "description": "Look at the neatly arranged dried medicinal herbs on the shelves.",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 1,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "curiosity",
+              "value": 4
+            }
+          ],
+          "repeatable": true
+        }
+      ]
+    }
+  ],
+  "interactiveElements": [],
+  "characters": [
+    {
+      "name": "Tobias",
+      "role": "Wandering Peddler",
+      "personality": "Cheerful but a little lost, used to selling adventure supplies, now has no inventory, enjoys chatting with every villager he meets.",
+      "appearance": "Wandering peddler, scruffy brown hair, worn patched canvas coat, empty wicker basket slung over shoulder, scuffed leather boots.",
+      "appearanceHint": "Carries an empty wicker basket and wears a well-traveled coat, looks like he is always wandering around.",
+      "motivation": "Find new useful goods to sell for the peaceful village, or discover an entirely new purpose for himself.",
+      "socialStyle": "extrovert, will stop every person he passes to strike up a conversation.",
+      "initialMemories": [
+        "He used to sell healing potions, swords and arrows to adventurers before the world was saved",
+        "He has not had any goods to sell for 3 months since the hero defeated the dark lord",
+        "He knows every resident's favorite story about the hero's adventures"
+      ]
+    },
+    {
+      "name": "Elara",
+      "role": "Village Healer",
+      "personality": "Gentle, patient, feels useless now that no one gets injured fighting monsters, enjoys tending to her herb garden in her free time.",
+      "appearance": "Village healer, long braided auburn hair, linen dress dyed pale green, leather pouch full of dried herbs at waist, calloused bare feet.",
+      "appearanceHint": "Wears a pale green dress and smells like dried herbs, looks calm and gentle.",
+      "motivation": "Find new ways to use her healing skills to help the village, even without wounded adventurers to treat.",
+      "socialStyle": "ambivert, prefers quiet time tending herbs but will help anyone who asks for assistance.",
+      "anchor": {
+        "type": "region",
+        "targetId": "healer_cottage"
+      },
+      "initialMemories": [
+        "She treated the hero's wounds three times during his quest to defeat the dark lord",
+        "Her patient bed has been empty for 6 months since the last monster was killed",
+        "She is experimenting with making herb tea for villagers instead of healing potions"
+      ]
+    },
+    {
+      "name": "Gareth",
+      "role": "Village Blacksmith",
+      "personality": "Stoic, proud of forging the hero's legendary sword, a little embarrassed that he only makes spoons now, takes his work very seriously regardless of what he makes.",
+      "appearance": "Village blacksmith, bald with bushy grey beard, muscular arms covered in soot stains, thick leather apron, heavy iron hammer hanging at hip.",
+      "appearanceHint": "Broad muscular man covered in soot, wears a thick leather apron, looks very strong.",
+      "motivation": "Learn to take pride in making everyday useful items instead of only weapons, pass down his smithing skills to a young apprentice someday.",
+      "socialStyle": "introvert, prefers working at his forge to chatting with villagers.",
+      "anchor": {
+        "type": "region",
+        "targetId": "blacksmith_forge"
+      },
+      "initialMemories": [
+        "He spent 2 years forging the hero's legendary sword that defeated the dark lord",
+        "He has made 472 spoons since the hero left the village",
+        "He keeps a small chip of the legendary sword's raw metal as a memento"
+      ]
+    },
+    {
+      "name": "Lira",
+      "role": "Wandering Bard",
+      "personality": "Cheerful, dramatic, only knows The Ballad of the Hero, sings it every chance she gets, a little oblivious that everyone has heard it dozens of times.",
+      "appearance": "Wandering bard, curly bright red hair, bright yellow tunic with frills, small wooden lute slung over back, colorful ribbons braided in hair.",
+      "appearanceHint": "Wears a bright yellow tunic and carries a small lute, looks very lively and dramatic.",
+      "motivation": "Write a new song that fits the peaceful new world, or find someone who hasn't heard The Ballad of the Hero yet.",
+      "socialStyle": "extrovert, will sing for anyone who stops to listen even for a few seconds.",
+      "initialMemories": [
+        "She sang The Ballad of the Hero at the hero's victory celebration 6 months ago",
+        "She has forgotten all other songs she used to know, only remembers The Ballad of the Hero",
+        "She once sang the ballad for 3 hours straight at the central plaza"
+      ]
+    },
+    {
+      "name": "Milo",
+      "role": "Aspiring Next Hero",
+      "personality": "Energetic, stubborn, believes he will be the next hero even though there are no monsters left, likes running around the village with his wooden sword.",
+      "appearance": "Village child, messy blonde hair, patched brown tunic, too-large leather boots, holds a crudely carved wooden sword.",
+      "appearanceHint": "Small kid carrying a wooden sword, always running around looking like he's on an adventure.",
+      "motivation": "Prove he is worthy of being the next hero, find a new evil to fight to protect the village.",
+      "socialStyle": "extrovert, likes challenging adults to mock sword fights whenever he can.",
+      "initialMemories": [
+        "He has heard The Ballad of the Hero 127 times and knows every word",
+        "He carved his wooden sword himself to look just like the hero's legendary sword",
+        "He believes the dark lord will come back someday and only he can defeat him"
+      ]
+    },
+    {
+      "name": "Owen",
+      "role": "Village Guard",
+      "personality": "Stoic, very dedicated to his job, a little bored now that there is no crime or monster attacks, keeps repeating his old patrol phrase without thinking.",
+      "appearance": "Village guard, short brown hair, dented iron armor, worn blue village tabard, spear in hand, leather helmet with a feather on top.",
+      "appearanceHint": "Wears dented iron armor and carries a spear, looks alert even though nothing ever happens.",
+      "motivation": "Keep the village safe even if there is nothing to fight, find new useful tasks to do during his patrols.",
+      "socialStyle": "ambivert, polite but only speaks when spoken to, usually repeats his standard patrol phrase first.",
+      "iconicCues": {
+        "speechQuirks": [
+          "Automatically responds to most greetings with his standard patrol phrase first"
+        ],
+        "catchphrases": [
+          "Nothing to report"
+        ],
+        "behavioralTics": [
+          "Taps his spear against the ground twice when bored"
+        ]
+      },
+      "initialMemories": [
+        "He patrolled the village gates every night during the war against the dark lord",
+        "He has not had anything to report for 6 consecutive months",
+        "He still checks the village gates 3 times every patrol just like he did during the war"
+      ]
+    },
+    {
+      "name": "Alaric",
+      "role": "Philosophical Village Chief",
+      "personality": "Thoughtful, wise, spends most of his time pondering the meaning of peace, likes sitting on the plaza benches watching the villagers go about their days.",
+      "appearance": "Village chief, long white hair and beard, loose dark blue robe, wooden staff carved with hero's symbol, wire-rimmed glasses perched on nose.",
+      "appearanceHint": "Old man with long white beard, carries a carved wooden staff, looks thoughtful and wise.",
+      "motivation": "Help the villagers find new purpose in the peaceful world, lead the village to thrive without the threat of evil.",
+      "socialStyle": "ambivert, likes listening more than speaking, will give thoughtful advice if anyone asks.",
+      "initialMemories": [
+        "He was the one who sent the hero off on his quest to defeat the dark lord 10 years ago",
+        "He has been keeping a journal of his thoughts about the meaning of a saved world",
+        "He believes the village's next great adventure is learning to live in peace"
+      ]
+    }
+  ],
+  "multiDay": {
+    "enabled": true,
+    "endOfDayText": "The sun dips below the hills, villagers lock up their homes and return indoors for the night.",
+    "newDayText": "The rooster crows at dawn, the village wakes up to another quiet peaceful day.",
+    "nextDayStartTime": "08:00"
+  },
+  "locations": [
+    {
+      "id": "central_plaza",
+      "name": "Central Plaza",
+      "description": "Open public space at the village core with the grand hero statue as its centerpiece.",
+      "expectedObjects": [
+        "hero_statue",
+        "wooden_benches"
+      ],
+      "interactions": [
+        {
+          "id": "admire_hero_statue",
+          "name": "Admire Hero Statue",
+          "description": "Stand in front of the statue and look at the hero's carved likeness.",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 1,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "nostalgia",
+              "value": 7
+            }
+          ],
+          "repeatable": true
+        }
+      ]
+    },
+    {
+      "id": "blacksmith_forge",
+      "name": "Blacksmith's Forge",
+      "description": "West-side workshop where the blacksmith once forged the hero's legendary sword, now makes household cutlery.",
+      "expectedObjects": [
+        "anvil",
+        "cooling_rack",
+        "stack_of_spoons"
+      ],
+      "interactions": [
+        {
+          "id": "browse_handmade_spoons",
+          "name": "Browse Handmade Spoons",
+          "description": "Look at the neatly stacked, well-crafted spoons the blacksmith has made.",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 1,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "curiosity",
+              "value": 5
+            }
+          ],
+          "repeatable": true
+        }
+      ]
+    },
+    {
+      "id": "healer_cottage",
+      "name": "Healer's Cottage",
+      "description": "East-side small cottage where the healer once treated wounded adventurers, now sits mostly unused.",
+      "expectedObjects": [
+        "herb_shelves",
+        "empty_patient_bed"
+      ],
+      "interactions": [
+        {
+          "id": "browse_herb_shelves",
+          "name": "Browse Herb Shelves",
+          "description": "Look at the neatly arranged dried medicinal herbs on the shelves.",
+          "availableWhenState": [
+            "available"
+          ],
+          "duration": 1,
+          "effects": [
+            {
+              "type": "character_need",
+              "target": "curiosity",
+              "value": 4
+            }
+          ],
+          "repeatable": true
+        }
+      ]
+    }
+  ]
+}

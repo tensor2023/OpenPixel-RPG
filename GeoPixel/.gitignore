@@ -1,0 +1,11 @@
+.cursor/
+
+node_modules/
+dist/
+*.db
+.env
+output/worlds/*/
+!output/worlds/.gitkeep
+.DS_Store
+*.log
+library/worlds/*/timelines/

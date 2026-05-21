@@ -1,0 +1,101 @@
+[
+  {
+    "id": "central_plaza",
+    "name": "Central Plaza",
+    "description": "Open public space at the village core with the grand hero statue as its centerpiece.",
+    "type": "outdoor",
+    "enterable": true,
+    "shapeConstraint": "flexible",
+    "placementHint": "Center",
+    "visualDescription": "Square stone-paved area with a tall carved stone statue",
+    "actions": [
+      "admire_hero_statue"
+    ],
+    "adjacentRegions": [],
+    "interactions": [
+      {
+        "id": "admire_hero_statue",
+        "name": "Admire Hero Statue",
+        "description": "Stand in front of the statue and look at the hero's carved likeness.",
+        "availableWhenState": [
+          "available"
+        ],
+        "duration": 1,
+        "effects": [
+          {
+            "type": "character_need",
+            "target": "nostalgia",
+            "value": 7
+          }
+        ],
+        "repeatable": true
+      }
+    ]
+  },
+  {
+    "id": "blacksmith_forge",
+    "name": "Blacksmith's Forge",
+    "description": "West-side workshop where the blacksmith once forged the hero's legendary sword, now makes household cutlery.",
+    "type": "building",
+    "enterable": true,
+    "shapeConstraint": "rectangular",
+    "placementHint": "West Side",
+    "visualDescription": "Rectangular stone building with a smoke vent on the roof",
+    "actions": [
+      "browse_handmade_spoons"
+    ],
+    "adjacentRegions": [],
+    "interactions": [
+      {
+        "id": "browse_handmade_spoons",
+        "name": "Browse Handmade Spoons",
+        "description": "Look at the neatly stacked, well-crafted spoons the blacksmith has made.",
+        "availableWhenState": [
+          "available"
+        ],
+        "duration": 1,
+        "effects": [
+          {
+            "type": "character_need",
+            "target": "curiosity",
+            "value": 5
+          }
+        ],
+        "repeatable": true
+      }
+    ]
+  },
+  {
+    "id": "healer_cottage",
+    "name": "Healer's Cottage",
+    "description": "East-side small cottage where the healer once treated wounded adventurers, now sits mostly unused.",
+    "type": "building",
+    "enterable": true,
+    "shapeConstraint": "rectangular",
+    "placementHint": "East Side",
+    "visualDescription": "Rectangular thatched-roof cottage with herb planters outside",
+    "actions": [
+      "browse_herb_shelves"
+    ],
+    "adjacentRegions": [],
+    "interactions": [
+      {
+        "id": "browse_herb_shelves",
+        "name": "Browse Herb Shelves",
+        "description": "Look at the neatly arranged dried medicinal herbs on the shelves.",
+        "availableWhenState": [
+          "available"
+        ],
+        "duration": 1,
+        "effects": [
+          {
+            "type": "character_need",
+            "target": "curiosity",
+            "value": 4
+          }
+        ],
+        "repeatable": true
+      }
+    ]
+  }
+]

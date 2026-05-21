@@ -1,0 +1,12 @@
+{
+  "art_style_prompt": "16bit 日系像素 JRPG，黄昏暖色，边缘清晰",
+  "art_style_prompt_one_line": "16bit 日系像素 JRPG，黄昏暖色，边缘清晰",
+  "placeQuery": "同济大学四平路校区",
+  "formattedAddress": "50 Chi Feng Lu, Yang Pu Qu, Shang Hai Shi, China, 200092",
+  "lat": 31.283136,
+  "lng": 121.500834,
+  "npm_run_create_suggestion": "基于真实地点「50 Chi Feng Lu, Yang Pu Qu, Shang Hai Shi, China, 200092」的开放街区俯视地图。美术风格：16bit 日系像素 JRPG，黄昏暖色，边缘清晰。卫星与街景参考图见 Map_gen_RPG/runtime-refs/。",
+  "worldx_env": {
+    "ART_STYLE_PROMPT": "运行 WorldX 地图管线前在 shell 中 export；或 source export_art_style.sh"
+  }
+}

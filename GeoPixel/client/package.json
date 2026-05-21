@@ -1,0 +1,29 @@
+{
+  "name": "geopixel-client",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.99.0",
+    "easystarjs": "^0.4.4",
+    "i18next": "^26.0.6",
+    "phaser": "^3.87.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-i18next": "^17.0.4",
+    "react-router-dom": "^7.5.0",
+    "recharts": "^3.8.1",
+    "vis-data": "^7.1.9",
+    "vis-network": "^9.1.9"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.0"
+  }
+}

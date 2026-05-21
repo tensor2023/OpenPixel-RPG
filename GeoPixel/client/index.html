@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GeoPixel</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root { --top-ui-offset: 52px; }
+      body { overflow: hidden; background: #070819; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+      #background-root {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      #game-root {
+        position: absolute;
+        top: var(--top-ui-offset);
+        left: 0;
+        width: 100%;
+        height: calc(100% - var(--top-ui-offset));
+        z-index: 1;
+      }
+      #label-root {
+        position: absolute;
+        top: var(--top-ui-offset);
+        left: 0;
+        width: 100%;
+        height: calc(100% - var(--top-ui-offset));
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 2;
+      }
+      #ui-root { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; }
+      .character-label {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1px;
+        transform: translate(-50%, -100%);
+        white-space: nowrap;
+        pointer-events: none;
+        user-select: none;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: geometricPrecision;
+      }
+      .character-label__mbti {
+        padding: 2px 8px 3px;
+        border-radius: 7px;
+        background: rgba(0, 0, 0, 0.68);
+        color: #ffffff;
+        font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: 0.03em;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+      }
+      .character-label__name-row {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .character-label__name {
+        color: #ffffff;
+        font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 1.05;
+        text-shadow:
+          0 1px 0 rgba(0, 0, 0, 0.95),
+          0 0 6px rgba(0, 0, 0, 0.75),
+          0 0 12px rgba(0, 0, 0, 0.35);
+      }
+      .character-label__icon {
+        font-size: 15px;
+        line-height: 1;
+        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+      }
+      .character-label__action-pill {
+        margin-top: 5px;
+        padding: 4px 10px;
+        background: rgba(255, 255, 255, 0.88);
+        color: #4b556b;
+        border-radius: 999px;
+        font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        pointer-events: none;
+        max-width: 150px;
+        text-align: center;
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.3;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 3px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="background-root"></div>
+    <div id="game-root"></div>
+    <div id="label-root"></div>
+    <div id="ui-root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
