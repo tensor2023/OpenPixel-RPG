@@ -8,6 +8,8 @@
   <img src="https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white" alt="Node.js 18+">
   <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white" alt="React 19">
+  <img src="https://img.shields.io/badge/Gemini-2.5%20%7C%203.1-4285F4?logo=google&logoColor=white" alt="Gemini 2.5 / 3.1">
+  <img src="https://img.shields.io/badge/Baidu%20Maps-API-2932E1?logo=baidu&logoColor=white" alt="Baidu Maps API">
   <img src="https://img.shields.io/badge/Status-Alpha-orange" alt="Alpha">
 </p>
 
