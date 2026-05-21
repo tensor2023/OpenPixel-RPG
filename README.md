@@ -70,8 +70,11 @@ Input any address on Earth, and OpenPixel-RPG generates an interactive pixel map
 **How it works:**
 1. Input an address and click **Load Map**.
 2. The 3D View loads a satellite image. Drag to fine-tune the area. Set a **Pixel Style** prompt.
-3. Click **Generate Global Map** and wait (~2 minutes) for the OSM whitebox + satellite + AI pipeline to complete.
-4. Click **Generate WorldX Game** to build the playable world.
+3. Click **Generate Global Map** — the backend runs a three-step pipeline:
+   - **Step 1 — OSM Whitebox**: Queries the OpenStreetMap Overpass API for all building footprints with height/levels data. Renders an isometric PNG showing building roof faces (light grey) and walls (shaded by orientation). Contains only building geometry — no roads, water, or labels. Serves as the geometric blueprint.
+   - **Step 2 — 3D Tiles Render**: Captures a Google 3D Tiles isometric screenshot for real-world color/texture reference.
+   - **Step 3 — AI Pixel Map**: Feeds the whitebox (geometry), 3D Tiles render (color), and style prompt to Gemini (`gemini-3.1-flash-image-preview`), which generates a pixel-art map respecting the building layout of the whitebox and the color palette of the real-world view.
+4. Click **Generate WorldX Game** to build the playable world with NPCs.
 5. Click **Enter World** (or it loads automatically) to start playing.
 
 | Mode | Description | Status |
