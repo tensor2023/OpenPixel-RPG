@@ -35,7 +35,7 @@ Upload your own photo, and OpenPixel-RPG turns it into a pixel-art JRPG world.
 
 ![Mode 1 Demo](video/mode1_demo.gif)
 
-> [Watch full video](video/mode1_demo.mp4)
+> [Watch full video](https://xueqinggao.github.io/video/mode1_demo.mp4)
 
 **How it works:**
 1. Select a local image from your device.
