@@ -63,7 +63,7 @@ Input any address on Earth, and OpenPixel-RPG generates an interactive pixel map
 
 ![Mode 3 Demo](video/mode3_demo.gif)
 
-> [Watch full video](video/mode3_demo.mp4)
+> [Watch full video](https://xueqinggao.github.io/video/mode3_demo.mp4)
 
 **How it works:**
 1. Input an address and click **Load Map**.
