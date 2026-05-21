@@ -15,6 +15,7 @@ venv/
 # Build
 dist/
 cache/
+.vite/
 
 # Databases
 *.sqlite
