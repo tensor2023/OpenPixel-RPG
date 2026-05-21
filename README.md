@@ -116,9 +116,57 @@ Open `http://localhost:5173` in your browser, choose a mode, and go.
 
 ---
 
-## NPC Generation
+## AI Architecture
 
-Once in the game world, click **Spawn NPC**, input the NPC's location, and wait ~30 seconds. NPCs with local knowledge and personalities will appear on the map. Walk up and press **Z** to interact. Click **Spawn NPC** again to edit or delete existing NPCs.
+### LLM Models — Gemini
+
+All AI workloads run on Google Gemini models via TokenRouter. Each role uses a specialized model:
+
+| Role | Model | Purpose |
+|------|-------|---------|
+| **Orchestrator** | `gemini-2.5-pro-preview` | One-shot world design from a user prompt — creates character profiles, zones, world rules, and action templates. |
+| **Image Generation** | `gemini-3.1-flash-image-preview` | Map pixel-art generation (Mode 1/3) + character sprite sheet generation. |
+| **Vision Review** | `gemini-3.1-pro-preview` | Quality review pass — checks generated map images for artifacts and consistency before they go live. |
+| **Simulation** | `gemini-2.5-flash-preview` | Runtime character behavior — action decisions, multi-turn dialogue, reflection, and memory consolidation. |
+| **Character Sprites** | `gemini-2.5-flash-image` | NPC sprite sheet generation for in-game characters (walk cycles, idle poses). |
+
+### Custom Agent Simulation System
+
+No external agent frameworks (LangGraph, LangChain) — fully custom perceive-decide-act loop running tick-by-tick for every NPC:
+
+| Component | Responsibility |
+|-----------|---------------|
+| `SimulationEngine` | Drives the tick loop — each tick, every NPC perceives, decides, acts, and remembers. |
+| `Perceiver` | Builds each NPC's perception context from nearby entities, recent events, and world state. |
+| `DecisionMaker` | Calls the Simulation LLM to select an action (move, talk, emote, use item, etc.) based on personality + perception. |
+| `DialogueGenerator` | Produces multi-turn NPC-to-NPC and NPC-to-player conversations with memory-aware context. |
+| `MemoryManager` | Stores individual memories, applies decay over time, and periodically consolidates related memories via LLM reflection. |
+| `EmotionManager` | Tracks valence and arousal per character, updated by events and dialogue outcomes. |
+
+Each NPC autonomously: **perceives** the environment → **decides** what to do → **executes** the action → **forms memories** → **reflects** on experiences. You can also play "god" at any time: inject events, edit memories or traits, and watch the social dynamics shift in response.
+
+**NPC Generation flow:** Click **Spawn NPC** in the game world → input location → the Orchestrator calls Gemini to design a character with local knowledge, personality, and backstory → sprite generated via `gemini-2.5-flash-image` → NPC appears on the map (~30s). Walk up and press **Z** to interact. Click **Spawn NPC** again to edit or delete existing NPCs.
+
+### OSM Whitebox — Global Map Generation Pipeline (Mode 3)
+
+When you generate a pixel map for any location on Earth, the first step is building the **OSM whitebox**:
+
+- Queries the **OpenStreetMap Overpass API** for all building footprints in the selected area (coordinates + `height` / `building:levels` tags).
+- Renders an isometric PNG at 1280×960 with the same camera angles as the 3D Tiles viewer:
+  - **Roof faces**: light grey with outlines for shape clarity.
+  - **Wall faces**: shaded by orientation — right-facing walls get medium grey, left-facing walls darker grey.
+  - **Background**: near-black for contrast.
+- **Contains**: building geometry only — footprints, heights, and 3D shapes. No roads, water, vegetation, labels, or terrain.
+- **Why it's needed**: The whitebox acts as a **geometric blueprint** for the AI. When Gemini generates the pixel-art map, it's instructed to place every white shape as a building at exactly the same position. Without this constraint, AI image generation would produce aesthetically pleasing but geographically inaccurate buildings. The whitebox ensures the output preserves real-world building layouts.
+
+### Baidu Maps API
+
+The Baidu Maps API provides street-level scene context for the reference collage pipeline:
+
+- **Baidu Maps Static Image API** (`staticimage/v2`): Given a coordinate, fetches a street-block scene image (实景图) at zoom level 17.
+- Used in the `Map_gen_RPG` pipeline to build a reference collage — satellite view on the left, Baidu street scene on the right — giving the AI both top-down and ground-level visual references.
+- Optional — the pipeline continues gracefully if the `BAIDU_MAP_AK` key is not configured.
+- Legacy: early versions used Baidu Maps WebGL API to capture 3D building whitebox screenshots (NYC-only, deprecated in favor of OSM Overpass for global coverage).
 
 ---
 
