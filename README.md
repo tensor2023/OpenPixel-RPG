@@ -99,7 +99,7 @@ pip install -r requirements.txt
 
 # 4. Configure API keys
 cp .env.example .env
-# Edit .env with your Google Maps and DashScope API keys
+# Edit .env with your Google Maps, Gemini, and DashScope API keys
 
 # 5. Start all services
 # Terminal 1: Vite frontend (port 5173)
