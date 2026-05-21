@@ -35,7 +35,7 @@ Upload your own photo, and OpenPixel-RPG turns it into a pixel-art JRPG world.
 
 ![Mode 1 Demo](video/mode1_demo.gif)
 
-> [Watch full video](https://xueqinggao.github.io/video/mode1_demo.mp4)
+> [Watch full video](https://tensor2023.github.io/xueqinggao.github.io/video/mode1_demo.mp4)
 
 **How it works:**
 1. Select a local image from your device.
@@ -49,7 +49,7 @@ Enter a Manhattan landmark name, and OpenPixel-RPG fetches pre-generated pixel t
 
 ![Mode 2 Demo](video/demo.gif)
 
-> [Watch full video](https://xueqinggao.github.io/video/Demo2.mp4)
+> [Watch full video](https://tensor2023.github.io/xueqinggao.github.io/video/Demo2.mp4)
 
 **How it works:**
 1. Click **City Map**, then input a location (e.g. Times Square, Central Park, Empire State Building, Brooklyn Bridge, and many more).
@@ -63,7 +63,7 @@ Input any address on Earth, and OpenPixel-RPG generates an interactive pixel map
 
 ![Mode 3 Demo](video/mode3_demo.gif)
 
-> [Watch full video](https://xueqinggao.github.io/video/mode3_demo.mp4)
+> [Watch full video](https://tensor2023.github.io/xueqinggao.github.io/video/mode3_demo.mp4)
 
 **How it works:**
 1. Input an address and click **Load Map**.
