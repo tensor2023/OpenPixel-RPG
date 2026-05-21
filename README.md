@@ -193,15 +193,19 @@ OpenPixel-RPG/
 │   ├── index.html             # Three-column layout (View+Pixel / Global / Game)
 │   ├── hyperparams.json       # Unified config (grid cells, canvas size, etc.)
 │   └── cache/                 # Satellite image disk cache
-├── GeoPixel/                # AI world engine (Mode 2 NYC + NPC + character simulation)
-│   ├── client/                # React + Phaser game client
-│   ├── server/                # Node.js backend API (Express + WebSocket + SQLite)
-│   ├── orchestrator/          # LLM world orchestration engine
-│   └── generators/            # Map & character image generation pipeline
+├── GeoPixel/                # AI world engine (Mode 1/2 NPC + agent simulation)
+│   ├── client/                # React 19 + Phaser game client
+│   ├── server/                # Node.js backend (Express + WebSocket + SQLite)
+│   │   ├── src/simulation/        # Custom agent simulation engine (perceive-decide-act loop)
+│   │   ├── src/core/              # World manager, character manager, memory manager
+│   │   └── src/llm/               # LLM client (Simulation + Dialogue + Reflection)
+│   ├── orchestrator/          # LLM world orchestration (Gemini 2.5 Pro)
+│   └── generators/            # Map & character image generation (Gemini 3.1 Flash)
 ├── WorldX-main/             # WorldX game engine (map pipeline, game runtime)
 │   ├── generators/map/        # index-from-image.mjs (Steps 2–6: compress → TMJ output)
 │   └── client/                # WorldX React + Phaser frontend
-├── Map_gen_RPG/             # Satellite → pixel map pipeline scripts (legacy/experimental)
+├── Map_gen_RPG/             # Satellite → pixel map pipeline (Baidu scene + ref collage)
+│   └── fetch_baidu_scene.py   # Baidu Maps Static Image API for street-level reference
 ├── Blog/                    # Documentation & tutorials (Chinese)
 ├── Paper/                   # Academic paper draft
 ├── ref/                     # Reference projects (isometric-nyc, etc.)
