@@ -30,7 +30,7 @@ const _origFetch = window.fetch
 window.fetch = function (url, options) {
   const urlStr = url instanceof URL ? url.toString() : (typeof url === 'string' ? url : null)
   if (urlStr && urlStr.includes('tile.googleapis.com')) {
-    return _origFetch(`/api/tile-proxy?url=${encodeURIComponent(urlStr)}`, options)
+    return _origFetch(`${API_BASE}/api/tile-proxy?url=${encodeURIComponent(urlStr)}`, options)
   }
   return _origFetch(url, options)
 }
@@ -102,10 +102,13 @@ const btnRefreshPixel = document.getElementById('btn-refresh-pixel')
 const btnRefreshWb = document.getElementById('btn-refresh-wb')
 const btnRefreshGlobal = document.getElementById('btn-refresh-global')
 
-const GLOBAL_API = 'http://localhost:5002'
+const API_BASE = import.meta.env.VITE_API_BASE || ''
+const GLOBAL_API = import.meta.env.VITE_GLOBAL_API || 'http://localhost:5002'
+const WORLDX_URL = import.meta.env.VITE_WORLDX_URL || 'http://localhost:3200'
 const uploadMenu = document.getElementById('upload-menu')
 const uploadOptionPhoto3d = document.getElementById('upload-option-photo3d')
 const gameFrame = document.getElementById('game-frame')
+if (gameFrame) gameFrame.src = WORLDX_URL
 const btnRefreshGame = document.getElementById('btn-refresh-game')
 const worldSelect = document.getElementById('world-select')
 const btnSwitchWorld = document.getElementById('btn-switch-world')
@@ -117,7 +120,7 @@ btnRefreshGame?.addEventListener('click', reloadGame)
 
 async function loadWorldList() {
   try {
-    const res = await fetch('/api/worlds')
+    const res = await fetch(`${API_BASE}/api/worlds`)
     if (!res.ok) return
     const data = await res.json()
     const worlds = data.worlds || []
@@ -142,7 +145,7 @@ async function loadWorldList() {
 
 async function switchWorld(worldId) {
   try {
-    await fetch('/api/world/switch', {
+    await fetch(`${API_BASE}/api/world/switch`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ worldId }),
@@ -286,7 +289,7 @@ window.addEventListener('resize', () => {
 // ---- Fetch API key from backend ----
 async function fetchConfig() {
   try {
-    const res = await fetch('/api/config')
+    const res = await fetch(`${API_BASE}/api/config`)
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     const text = await res.text()
     if (!text) throw new Error('Empty response — is the Flask server (python server.py) running on port 5001?')
@@ -301,7 +304,7 @@ async function fetchConfig() {
 
 // ---- Geocode ----
 async function geocode(location) {
-  const res = await fetch(`/api/geocode?q=${encodeURIComponent(location)}`)
+  const res = await fetch(`${API_BASE}/api/geocode?q=${encodeURIComponent(location)}`)
   if (!res.ok) {
     const err = await res.json()
     throw new Error(err.error || 'Geocoding failed')
@@ -331,7 +334,7 @@ function _setupSatelliteDisplay() {
 
 async function loadSatelliteImage(lat, lon) {
   try {
-    const res = await fetch(`/api/satellite?lat=${lat}&lon=${lon}&zoom=18&size=640&scale=2`)
+    const res = await fetch(`${API_BASE}/api/satellite?lat=${lat}&lon=${lon}&zoom=18&size=640&scale=2`)
     if (!res.ok) {
       const err = await res.json().catch(() => ({ error: `HTTP ${res.status}` }))
       throw new Error(err.error || `HTTP ${res.status}`)
@@ -754,7 +757,7 @@ async function generatePixelArt(skipCache = false) {
   setStatus('Generating pixel map...')
 
   try {
-    const res = await fetch('/api/generate', {
+    const res = await fetch(`${API_BASE}/api/generate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -892,7 +895,7 @@ async function generateGeopixelGame() {
   setStatus('Generating GeoPixel game map (~5–10 minutes)...')
 
   try {
-    const res = await fetch('/api/run-geopixel', {
+    const res = await fetch(`${API_BASE}/api/run-geopixel`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -920,7 +923,7 @@ async function generateGeopixelGame() {
 function pollGeopixelStatus(jobId) {
   const interval = setInterval(async () => {
     try {
-      const res = await fetch(`/api/geopixel-status/${jobId}`)
+      const res = await fetch(`${API_BASE}/api/geopixel-status/${jobId}`)
       const job = await res.json()
 
       if (job.status === 'done') {
@@ -1194,7 +1197,7 @@ btnRefreshView.addEventListener('click', async () => {
   if (btnResetPan) btnResetPan.style.display = 'none'
   // Fetch with refresh=1 to bypass cache
   try {
-    const res = await fetch(`/api/satellite?lat=${currentLat}&lon=${currentLon}&zoom=18&size=640&scale=2&refresh=1`)
+    const res = await fetch(`${API_BASE}/api/satellite?lat=${currentLat}&lon=${currentLon}&zoom=18&size=640&scale=2&refresh=1`)
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     const blob = await res.blob()
     satelliteDataUrl = await new Promise((resolve) => {

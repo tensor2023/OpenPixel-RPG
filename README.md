@@ -19,7 +19,7 @@
 
 Turn any place on Earth into an interactive pixel-art JRPG.
 
-**OpenPixel-RPG** is an AI-powered pixel-art open-world UGC game. Input any location name, or upload your own photo, describe the art style you want, and OpenPixel-RPG generates a complete interactive pixel map with local NPCs. Under the hood, Google Gemini models handle everything: world design (`gemini-2.5-pro`), map & sprite generation (`gemini-3.1-flash-image`), vision quality review (`gemini-3.1-pro`), and runtime character simulation (`gemini-2.5-flash`). 
+**OpenPixel-RPG** is an AI-powered pixel-art open-world UGC game. Input any location name, or upload your own photo, describe the art style you want, and OpenPixel-RPG generates a complete interactive pixel map with local NPCs. Under the hood, a mix of LLMs power the pipeline: world design (`gemini-2.5-pro`), map pixel-art generation (`gemini-3.1-flash-image`), vision quality review (`gemini-3.1-pro`), runtime character simulation (`gemini-2.5-flash`), character sprite generation (`gpt-image-2`), and NPC text generation (`deepseek-chat`). 
 
 Born from [isometric.nyc](https://isometric.nyc), this project replaces the NYC-specific data pipeline with globally available OSM Overpass + satellite + Google 3D Tiles, uses Baidu Maps for street-level scene reference, and deeply integrates [WorldX](https://github.com/YGYOOO/WorldX)'s AI world engine.
 
