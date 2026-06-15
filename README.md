@@ -133,7 +133,7 @@ All AI workloads run via TokenRouter or direct API. Each role uses a specialized
 
 ### Custom Agent Simulation System
 
-**NPC Generation flow:** Click **Spawn NPC** in the game world → input location → the Orchestrator calls Gemini to design a character with local knowledge, personality, and backstory → sprite generated via `gemini-2.5-flash-image` → NPC appears on the map (~30s). Walk up and press **Z** to interact. Click **Spawn NPC** again to edit or delete existing NPCs.
+**NPC Generation flow:** Click **Spawn NPC** in the game world → input location → the Orchestrator calls Gemini to design a character with local knowledge, personality, and backstory → sprite generated via `openai/gpt-image-2` (TokenRouter) → NPC appears on the map (~30s). Walk up and press **Z** to interact. Click **Spawn NPC** again to edit or delete existing NPCs.
 
 ### OSM Whitebox — Global Map Generation Pipeline (Mode 3)
 
