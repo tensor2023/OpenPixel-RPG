@@ -118,17 +118,18 @@ Open `http://localhost:5173` in your browser, choose a mode, and go.
 
 ## AI Architecture
 
-### LLM Models — Gemini
+### LLM Models
 
-All AI workloads run on Google Gemini models via TokenRouter. Each role uses a specialized model:
+All AI workloads run via TokenRouter or direct API. Each role uses a specialized model:
 
 | Role | Model | Purpose |
 |------|-------|---------|
 | **Orchestrator** | `gemini-2.5-pro-preview` | One-shot world design from a user prompt — creates character profiles, zones, world rules, and action templates. |
-| **Image Generation** | `gemini-3.1-flash-image-preview` | Map pixel-art generation (Mode 1/3) + character sprite sheet generation. |
+| **Image Generation** | `gemini-3.1-flash-image-preview` | Map pixel-art generation (Mode 1/3). |
 | **Vision Review** | `gemini-3.1-pro-preview` | Quality review pass — checks generated map images for artifacts and consistency before they go live. |
 | **Simulation** | `gemini-2.5-flash-preview` | Runtime character behavior — action decisions, multi-turn dialogue, reflection, and memory consolidation. |
-| **Character Sprites** | `gemini-2.5-flash-image` | NPC sprite sheet generation for in-game characters (walk cycles, idle poses). |
+| **Character Sprites** | `openai/gpt-image-2` | Character sprite generation from reference photos (via TokenRouter). |
+| **NPC Generation** | `deepseek-chat` | NPC profile and dialogue text generation (via DeepSeek API). |
 
 ### Custom Agent Simulation System
 
