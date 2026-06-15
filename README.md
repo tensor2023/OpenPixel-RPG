@@ -19,7 +19,7 @@
 
 Turn any place on Earth into an interactive pixel-art JRPG.
 
-**OpenPixel-RPG** is an AI-powered pixel-art open-world UGC game. Input any location name, or upload your own photo, describe the art style you want, and OpenPixel-RPG generates a complete interactive pixel map with local NPCs. Under the hood, Google Gemini models handle everything: world design (`gemini-2.5-pro`), map & sprite generation (`gemini-3.1-flash-image`), vision quality review (`gemini-3.1-pro`), and runtime character simulation (`gemini-2.5-flash`). Every NPC runs on a custom agent simulation system — no LangGraph or LangChain, just a hand-built perceive-decide-act loop where characters perceive their surroundings, make decisions via LLM, form memories, and produce emergent narratives no one scripted. You can also play "god" at any time: inject events, edit character memories or traits, and watch the world shift in response.
+**OpenPixel-RPG** is an AI-powered pixel-art open-world UGC game. Input any location name, or upload your own photo, describe the art style you want, and OpenPixel-RPG generates a complete interactive pixel map with local NPCs. Under the hood, Google Gemini models handle everything: world design (`gemini-2.5-pro`), map & sprite generation (`gemini-3.1-flash-image`), vision quality review (`gemini-3.1-pro`), and runtime character simulation (`gemini-2.5-flash`). 
 
 Born from [isometric.nyc](https://isometric.nyc), this project replaces the NYC-specific data pipeline with globally available OSM Overpass + satellite + Google 3D Tiles, uses Baidu Maps for street-level scene reference, and deeply integrates [WorldX](https://github.com/YGYOOO/WorldX)'s AI world engine.
 
@@ -131,19 +131,6 @@ All AI workloads run on Google Gemini models via TokenRouter. Each role uses a s
 | **Character Sprites** | `gemini-2.5-flash-image` | NPC sprite sheet generation for in-game characters (walk cycles, idle poses). |
 
 ### Custom Agent Simulation System
-
-No external agent frameworks (LangGraph, LangChain) — fully custom perceive-decide-act loop running tick-by-tick for every NPC:
-
-| Component | Responsibility |
-|-----------|---------------|
-| `SimulationEngine` | Drives the tick loop — each tick, every NPC perceives, decides, acts, and remembers. |
-| `buildPerception()` | Builds each NPC's perception context from nearby entities, recent events, current emotion, and world state. |
-| `DecisionMaker` | Calls the Simulation LLM to select an action (move, talk, emote, use item, etc.) based on personality + perception. |
-| `DialogueGenerator` | Produces multi-turn NPC-to-NPC and NPC-to-player conversations with memory-aware context. |
-| `MemoryManager` | Stores individual memories, applies decay over time, and periodically consolidates related memories via LLM reflection. |
-| `emotion-manager` | `updateEmotion()` / `decayEmotion()` / `getEmotionLabel()` — tracks valence and arousal per character, updated by events and dialogue outcomes. |
-
-Each NPC autonomously: **perceives** the environment → **decides** what to do → **executes** the action → **forms memories** → **reflects** on experiences. You can also play "god" at any time: inject events, edit memories or traits, and watch the social dynamics shift in response.
 
 **NPC Generation flow:** Click **Spawn NPC** in the game world → input location → the Orchestrator calls Gemini to design a character with local knowledge, personality, and backstory → sprite generated via `gemini-2.5-flash-image` → NPC appears on the map (~30s). Walk up and press **Z** to interact. Click **Spawn NPC** again to edit or delete existing NPCs.
 
